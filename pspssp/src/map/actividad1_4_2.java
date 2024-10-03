@@ -13,7 +13,7 @@ public class actividad1_4_2 {
 
         //Creo el proceso
 
-        ProcessBuilder primo = new ProcessBuilder("/home/usuario/.jdks/openjdk-23/bin/java", "chivato.actividad1_4", "Felipe");
+        ProcessBuilder primo = new ProcessBuilder("/home/usuario/.jdks/openjdk-23/bin/java", "map.actividad1_4", "Felipe");
 
         // Se establece donde se ejecuta
 

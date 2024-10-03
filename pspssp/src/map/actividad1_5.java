@@ -5,7 +5,7 @@ import java.io.*;
 public class actividad1_5 {
 
     public static void main(String[] args) throws IOException {
-            File direccion = new File("/home/usuario/Dropbox/mariano/IdeaProjects/pspssp/out/production/pspssp");
+            File direccion = new File("/home/usuario/Repository/IdeaProjects/pspssp/out/production/pspssp");
             ProcessBuilder primo = new ProcessBuilder(new String[]{"/home/usuario/.jdks/openjdk-23/bin/java", "chivato.actividad1_7", "Felipe"});
             primo.directory(direccion);
             Process proceso = primo.start();
