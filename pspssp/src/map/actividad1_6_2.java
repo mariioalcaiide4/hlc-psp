@@ -5,7 +5,7 @@ import java.io.*;
 public class actividad1_6_2 {
     public static void main(String[] args) throws IOException {
 
-        File directorio = new File("/home/usuario/Repository/IdeaProjects/pspssp/out/production/pspssp");
+        File directorio = new File("/home/usuario/hlc-psp/pspssp/out/production/pspssp");
         ProcessBuilder plb = new ProcessBuilder("/home/usuario/.jdks/openjdk-23/bin/java", "map.actividad1_6");
         plb.directory(directorio);
 
@@ -17,7 +17,7 @@ public class actividad1_6_2 {
         //Cominezo el proceso y envío entrada del proceso "pr" que ejecuta el programa actividad1_6 y sobreescribiría información, en este caso numeros
 
         os.write("15\n".getBytes());
-        os.write("16\n".getBytes());
+        os.write("24\n".getBytes());
         os.flush();
 
         //Meto de entrada dos numero, en este caso las dos variables que tengo y limpiezo el flujo de la entrada
