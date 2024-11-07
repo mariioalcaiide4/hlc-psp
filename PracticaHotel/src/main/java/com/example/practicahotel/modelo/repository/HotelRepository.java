@@ -14,7 +14,7 @@ public interface HotelRepository {
 
     void editarCliente(PersonVO var1) throws ExcepcionHotel;
 
-    
+
 
     int lastId() throws ExcepcionHotel;
 }

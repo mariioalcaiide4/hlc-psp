@@ -17,10 +17,10 @@ public class hiloprioritario extends Thread {
     public void run(){
         while(!stopHilo){
             try {
-                Thread.sleep(20);
+                Thread.sleep(2);
             }catch(Exception e){}
             c++;
         }
-        System.out.println("Fin hilo" +this.getName());
+        System.out.println("Fin hilo " +this.getName());
     }
 }

@@ -16,11 +16,16 @@ public class uso_hiloprioritario {
         h3.start();
 
         try {
-            Thread.sleep(8000);
+            Thread.sleep(12000);
         } catch(Exception e){ }
 
+        h1.pararHilo();
+        h2.pararHilo();
+        h3.pararHilo();
 
-
+        System.out.println("h1 (Prioridad Maxima):" + h1.getContador());
+        System.out.println("h2 (Prioridad Normal):" + h2.getContador());
+        System.out.println("h3 (Prioridad Minima):" + h3.getContador());
 
     }
 }
