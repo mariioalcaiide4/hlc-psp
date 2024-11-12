@@ -9,6 +9,8 @@ public class ClienteVO {
     String localidad;
     String provincia;
 
+    //Constructor por defecto
+
     public ClienteVO(String dni, String nombre, String apellido, String direccion, String localidad, String province) {
         this.dni = dni;
         this.nombre = nombre;
@@ -18,6 +20,8 @@ public class ClienteVO {
         this.provincia = province;
     }
 
+
+    //Getters y setters
 
     public String getDni() {return dni;}
     public void setDni(String dni) {this.dni = dni;}

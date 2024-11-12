@@ -12,6 +12,7 @@ module com.example.practicahotel {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires mysql.connector.java;
+    requires java.desktop;
 
     opens com.example.practicahotel to javafx.fxml;
     exports com.example.practicahotel.controller;

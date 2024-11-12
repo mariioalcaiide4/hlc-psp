@@ -69,7 +69,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d,20%);
+    -fx-background-color: derive(#0ac73d,20%);
 }
 
 .context-menu {
