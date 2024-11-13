@@ -1,6 +1,6 @@
 package com.example.practicahotel.view;
 
-import com.mysql.cj.conf.StringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +18,7 @@ public class Cliente {
 
     //Constructor por defecto
 
-    public Cliente(){
+    public Cliente() {
         this.dni = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.apellido = new SimpleStringProperty();

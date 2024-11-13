@@ -2,6 +2,29 @@
     -fx-background-color: #1d1d1d;
 }
 
+grid-pane {
+    -fx-padding: 10;
+    -fx-hgap: 5;
+    -fx-vgap: 5;
+}
+
+.grid-pane .cell {
+    -fx-pref-width: 100px;  /* Ajusta este valor según el tamaño deseado */
+    -fx-pref-height: 40px;  /* Ajusta este valor según el tamaño deseado */
+    -fx-alignment: center;  /* Centra el contenido de la celda */
+    -fx-border-color: orange;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-background-color: #f7b64e;
+}
+
+.grid-pane .label {
+    -fx-font-size: 13px; /* Ajusta el tamaño de la fuente según el diseño */
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-background-color: white;
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -69,7 +92,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#0ac73d,20%);
+    -fx-background-color: derive(#2c4c88,20%);
 }
 
 .context-menu {

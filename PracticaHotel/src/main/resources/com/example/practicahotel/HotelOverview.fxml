@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.HotelOverview">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.HotelOverview">
    <children>
       <SplitPane dividerPositions="0.33612040133779264" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -25,10 +24,10 @@
                <children>
                   <SplitPane dividerPositions="0.5025252525252525" orientation="VERTICAL" prefHeight="398.0" prefWidth="393.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" stylesheets="@Styles.css">
                            <children>
                               <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="36.0" prefWidth="391.0" text="Datos Personales del Cliente" />
-                              <GridPane layoutX="1.0" layoutY="39.0" prefHeight="150.0" prefWidth="391.0">
+                              <GridPane layoutX="1.0" layoutY="39.0" prefHeight="150.0" prefWidth="391.0" stylesheets="@Styles.css">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -42,6 +41,21 @@
                                     <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
+                                 <children>
+                                    <Label prefHeight="22.0" prefWidth="202.0" text="Nombre" GridPane.rowIndex="1" />
+                                    <Label text="Label" GridPane.rowIndex="2" />
+                                    <Label text="Label" GridPane.rowIndex="3" />
+                                    <Label text="Label" GridPane.rowIndex="4" />
+                                    <Label text="Label" GridPane.rowIndex="5" />
+                                    <Label text="Label" GridPane.rowIndex="6" />
+                                    <Label text="Label" GridPane.columnIndex="1" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                 </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
