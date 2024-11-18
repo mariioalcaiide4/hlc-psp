@@ -24,9 +24,9 @@ public class MainApp extends Application {
     public MainApp() throws ExcepcionHotel {
             ClienteRepositoryImpl clienteRepository = new ClienteRepositoryImpl();
             clienteModelo = new ClienteModelo();
-            agendaModelo.setPersonRepository(personRepository);
-            ArrayList<Person> listaPersonas = agendaModelo.obtenerPersonas();
-            personData.addAll(listaPersonas);
+            clienteModelo.setClienteRepository(clienteRepository);
+            ArrayList<Cliente> listaClientes = clienteModelo.obtenerClientes();
+            clienteData.addAll(listaClientes);
 
             // Add some sample data
             //personData.add(new Person("Pikiko", "Maravilla"));
@@ -40,16 +40,16 @@ public class MainApp extends Application {
             //personData.add(new Person("Martin", "Mueller"));
         }
 
-        public ObservableList<Person> getPersonData() {
-            return personData;
+        public ObservableList<Cliente> getClientData() {
+            return clienteData;
         }
 
-        private Stage primaryStage;
+        private Stage escenarioPrincipal;
         private BorderPane rootLayout;
 
         public void start(Stage primaryStage) {
-            this.primaryStage = primaryStage;
-            this.primaryStage.setTitle("Agenda");
+            this.escenarioPrincipal = primaryStage;
+            this.escenarioPrincipal.setTitle("Agenda");
             initRootLayout();
             showPersonOverview();
         }
@@ -58,7 +58,7 @@ public class MainApp extends Application {
             try {
                 // Load root layout from fxml file.
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("/Agenda/RootLayout.fxml"));
+                loader.setLocation(MainApp.class.getResource("/com.example.practicahotel/RootLayout.fxml"));
                 rootLayout = (BorderPane) loader.load();
 
                 // Show the scene containing the root layout.

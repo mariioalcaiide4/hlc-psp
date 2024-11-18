@@ -1,5 +1,5 @@
 package Actividad2_7;
-
+/*
 public class hilo2ejemplo extends Thread{
     private hilo_contador contador;
 
@@ -22,6 +22,4 @@ public class hilo2ejemplo extends Thread{
         }
     }
 }
-
-
-
+*/

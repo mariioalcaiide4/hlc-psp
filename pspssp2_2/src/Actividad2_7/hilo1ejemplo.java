@@ -1,7 +1,7 @@
 package Actividad2_7;
 
-public class hilo1ejemplo extends Thread{
-    private hilo_contador contador;
+//public class hilo1ejemplo extends Thread{
+  /*  private hilo_contador contador;
 
     public hilo1ejemplo(String n, hilo_contador c){
         setName(n);
@@ -21,3 +21,4 @@ public class hilo1ejemplo extends Thread{
     }
 
 }
+*/
