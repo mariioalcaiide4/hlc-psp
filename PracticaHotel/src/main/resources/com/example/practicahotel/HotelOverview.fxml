@@ -6,73 +6,87 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.HotelOverview">
-   <children>
-      <SplitPane dividerPositions="0.33444816053511706" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="207.0">
-               <children>
-                  <TableView prefHeight="398.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn fx:id="firstNameLabel" prefWidth="99.0" text="Nombre" />
-                      <TableColumn fx:id="lastNameLabel" prefWidth="97.0" text="Apellido" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-               <children>
-                  <SplitPane dividerPositions="0.5025252525252525" orientation="VERTICAL" prefHeight="398.0" prefWidth="393.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="170.0" prefWidth="392.0">
-                           <children>
-                              <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="195.0" text="Datos Personales del Cliente" />
-                              <GridPane layoutX="1.0" layoutY="39.0" prefHeight="150.0" prefWidth="391.0">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints maxHeight="28.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="50.0" minHeight="20.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="45.0" minHeight="20.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="46.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="62.0" minHeight="15.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="50.0" minHeight="15.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="39.0" prefWidth="196.0" text="Nombre" GridPane.rowIndex="1" />
-                                    <Label alignment="CENTER" prefHeight="10.0" prefWidth="196.0" text="Apellido" GridPane.rowIndex="2" />
-                                    <Label alignment="CENTER" prefHeight="21.0" prefWidth="196.0" text="Direccion" GridPane.rowIndex="3" />
-                                    <Label alignment="CENTER" prefHeight="0.0" prefWidth="241.0" text="Localidad" GridPane.rowIndex="4" />
-                                    <Label alignment="CENTER" prefHeight="19.0" prefWidth="262.0" text="Provincia" GridPane.rowIndex="5" />
-                                    <Label fx:id="dniLabel" alignment="CENTER" prefHeight="208.0" prefWidth="228.0" text="Label" GridPane.columnIndex="1" />
-                                    <Label fx:id="firstNameLabel" alignment="CENTER" prefHeight="216.0" prefWidth="240.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label fx:id="lastNameLabel" alignment="CENTER" prefHeight="184.0" prefWidth="230.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label fx:id="streetLabel" alignment="CENTER" prefHeight="169.0" prefWidth="223.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="localidadLabel" alignment="CENTER" prefHeight="135.0" prefWidth="219.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label fx:id="provinciaLabel" alignment="CENTER" prefHeight="141.0" prefWidth="237.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label alignment="CENTER" prefHeight="35.0" prefWidth="196.0" text="DNI" />
-                                 </children>
-                              </GridPane>
-                              <Button layoutX="332.0" layoutY="-1.0" mnemonicParsing="false" text="Delete" />
-                              <Button layoutX="272.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="58.0" text="Edit.." />
-                              <Button layoutX="212.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="60.0" text="New.." />
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="205.0" prefWidth="392.0">
-                           <children>
-                              <Label alignment="CENTER" layoutY="-3.0" prefHeight="36.0" prefWidth="195.0" text="Reservas del Cliente" />
-                              <Button layoutX="331.0" mnemonicParsing="false" text="Delete" />
-                              <Button layoutX="271.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="60.0" text="Edit..." />
-                              <Button layoutX="211.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="60.0" text="New..." />
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.ClienteOverviewController">
+    <children>
+        <SplitPane dividerPositions="0.3" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <!-- Panel izquierdo: Tabla de clientes -->
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="207.0">
+                    <children>
+                        <TableView fx:id="clienteTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <columns>
+                                <TableColumn fx:id="firstNameColumn" text="Nombre" />
+                                <TableColumn fx:id="lastNameColumn" text="Apellido" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+
+                <!-- Panel derecho: Detalles del cliente y reservas -->
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <!-- Datos personales -->
+                                <AnchorPane>
+                                    <children>
+                                        <Label alignment="CENTER" text="Datos Personales del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                        <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints halignment="RIGHT" minWidth="80.0" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
+                                            </columnConstraints>
+                                            <children>
+                                                <Label text="DNI" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                <Label fx:id="dniLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                <Label text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                                <Label fx:id="firstNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Apellido" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                                <Label fx:id="lastNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="Dirección" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                                <Label fx:id="streetLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <Label text="Localidad" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                                <Label fx:id="localidadLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label text="Provincia" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                                <Label fx:id="provinciaLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            </children>
+                                 <rowConstraints>
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                 </rowConstraints>
+                                        </GridPane>
+                                        <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                           <children>
+                                               <Button onAction="#handleNewClient" text="New.." />
+                                               <Button onAction="#handleEditClient" text="Edit.." />
+                                               <Button onAction="#handleDeleteClient" text="Delete" />
+                                           </children>
+                                        </HBox>
+                                    </children>
+                                </AnchorPane>
+
+                                <!-- Reservas del cliente -->
+                                <AnchorPane>
+                                    <children>
+                                        <Label text="Reservas del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                        <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                           <children>
+                                               <Button text="New..." />
+                                               <Button text="Edit..." />
+                                               <Button text="Delete" />
+                                           </children>
+                                        </HBox>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

@@ -23,8 +23,8 @@ public class ClienteModelo {
 
     }
 
-    public void borrarCliente(String dni) throws ExcepcionHotel {
-        clienteRepository.borrarCliente(dni);
+    public void borrarCliente(Cliente cliente) throws ExcepcionHotel {
+        clienteRepository.borrarCliente(cliente.getDni());
 
 
     }

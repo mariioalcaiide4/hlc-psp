@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.PersonEditDialog">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.PersonEditDialogController">
    <children>
       <GridPane prefHeight="327.0" prefWidth="601.0">
         <columnConstraints>
@@ -23,12 +22,12 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="dniField" GridPane.columnIndex="1" />
+            <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="streetField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="localidadField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="provinciaField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label alignment="CENTER" prefHeight="346.0" prefWidth="428.0" text="DNI" />
             <Label alignment="CENTER" prefHeight="302.0" prefWidth="340.0" text="Nombre" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="279.0" prefWidth="357.0" text="Apellido" GridPane.rowIndex="2" />
@@ -37,7 +36,7 @@
             <Label alignment="CENTER" prefHeight="101.0" prefWidth="308.0" text="Provincia" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Button layoutX="520.0" layoutY="357.0" mnemonicParsing="false" text="Cancelar" />
-      <Button layoutX="440.0" layoutY="357.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="72.0" text="Añadir" />
+      <Button layoutX="520.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
+      <Button layoutX="440.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="29.0" prefWidth="72.0" text="Añadir" />
    </children>
 </AnchorPane>

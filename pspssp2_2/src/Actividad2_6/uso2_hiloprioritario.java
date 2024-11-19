@@ -24,11 +24,11 @@ public class uso2_hiloprioritario extends Thread {
         uso2_hiloprioritario hilo3 = new uso2_hiloprioritario("Hilo3");
         uso2_hiloprioritario hilo4 = new uso2_hiloprioritario("Hilo4");
         uso2_hiloprioritario hilo5 = new uso2_hiloprioritario("Hilo5");
-        uso2_hiloprioritario hilo6 = new uso2_hiloprioritario("Hilo1");
-        uso2_hiloprioritario hilo7 = new uso2_hiloprioritario("Hilo2");
-        uso2_hiloprioritario hilo8 = new uso2_hiloprioritario("Hilo3");
-        uso2_hiloprioritario hilo9 = new uso2_hiloprioritario("Hilo4");
-        uso2_hiloprioritario hilo10 = new uso2_hiloprioritario("Hilo5");
+        uso2_hiloprioritario hilo6 = new uso2_hiloprioritario("Hilo6");
+        uso2_hiloprioritario hilo7 = new uso2_hiloprioritario("Hilo7");
+        uso2_hiloprioritario hilo8 = new uso2_hiloprioritario("Hilo8");
+        uso2_hiloprioritario hilo9 = new uso2_hiloprioritario("Hilo9");
+        uso2_hiloprioritario hilo10 = new uso2_hiloprioritario("Hilo10");
 
 
         //Asignamos prioridades

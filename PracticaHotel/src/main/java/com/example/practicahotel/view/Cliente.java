@@ -1,8 +1,6 @@
 package com.example.practicahotel.view;
 
 import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Cliente {
@@ -40,14 +38,28 @@ public class Cliente {
 
     public String getDni() {return dni.getValue();}
     public void setDni(String dni) {this.dni.setValue(dni);}
+
+
     public String getNombre() {return nombre.getValue();}
     public void setNombre(String nombre) {this.nombre.setValue(nombre);}
+    public StringProperty firstNameProperty() {
+        return nombre;
+    }
+
     public String getApellido() {return apellido.getValue();}
     public void setApellido(String apellido) {this.apellido.setValue(apellido);}
+    public StringProperty lastNameProperty() {
+        return apellido;
+    }
+
     public String getDireccion() {return direccion.getValue();}
     public void setDireccion(String direccion) {this.direccion.setValue(direccion);}
+
+
     public String getLocalidad() {return localidad.getValue();}
     public void setLocalidad(String localidad) {this.localidad.setValue(localidad);}
+
+
     public String getProvincia() {return provincia.getValue();}
     public void setProvincia(String provincia) {this.provincia.setValue(provincia);}
 

@@ -17,10 +17,15 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     private ArrayList<ClienteVO> clientes;
     private ClienteVO cliente;
 
+    public ClienteRepositoryImpl(){
+        this.conexion = new ConexionJDBC();
+    }
+
     @Override
     public ArrayList<ClienteVO> ObtenerListaClientes() throws ExcepcionHotel {
         try{
             Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();
             this.clientes = new ArrayList<>();
             this.sentencia = "SELECT * FROM clientes";
             ResultSet rs = this.statement.executeQuery(this.sentencia);
@@ -38,6 +43,8 @@ public class ClienteRepositoryImpl implements ClienteRepository {
                 this.clientes.add(this.cliente);
             }
 
+            rs.close();
+            this.statement.close();
             this.conexion.desconectarBD(connex);
             return this.clientes;
         } catch (SQLException e) {
@@ -50,6 +57,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public void añadirCliente(ClienteVO var1) throws ExcepcionHotel {
         try {
             Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();
             this.sentencia = "INSERT INTO clientes (dni, nombre, apellido, direccion, localidad, provincia) VALUES ('"
                     + var1.getDni() + "','"
                     + var1.getNombre() + "','"
@@ -65,14 +73,13 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         }
     }
 
-
-    public void borrarCliente(String dni) throws ExcepcionHotel {
+    public void borrarCliente(String idCliente) throws ExcepcionHotel {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
-            Statement statement1 = connex.createStatement();
-            String sql = String.format("DELETE FROM clientes WHERE dni = %d", dni);
-            statement1.executeUpdate(sql);
+            String sql = String.format("DELETE FROM clientes WHERE dni = %d", idCliente);
+            this.statement.executeUpdate(sql);
+            this.statement.close();
             this.conexion.desconectarBD(connex);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -99,13 +106,12 @@ public class ClienteRepositoryImpl implements ClienteRepository {
 
         try {
             Connection connex = this.conexion.conectarBD();
-            Statement statement1 = connex.createStatement();
-            ResultSet registro = statement1.executeQuery("SELECT dni FROM cliente ORDER BY dni DESC LIMIT 1");
+            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT dni FROM cliente ORDER BY dni DESC LIMIT 1");
             if (registro.next()) {
                 lastIdCliente = registro.getInt("");
             }
             registro.close();
-            statement1.close();
+            this.statement.close();
             this.conexion.desconectarBD(connex);
         } catch (SQLException var5) {
             throw new ExcepcionHotel("No se ha podido realizar la búsqueda del ID");

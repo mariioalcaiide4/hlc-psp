@@ -49,66 +49,66 @@ public class MainApp extends Application {
 
         public void start(Stage primaryStage) {
             this.escenarioPrincipal = primaryStage;
-            this.escenarioPrincipal.setTitle("Agenda");
+            this.escenarioPrincipal.setTitle("Gestión Hotel");
             initRootLayout();
-            showPersonOverview();
+            showClienteOverview();
         }
 
         public void initRootLayout() {
             try {
                 // Load root layout from fxml file.
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("/com.example.practicahotel/RootLayout.fxml"));
+                loader.setLocation(MainApp.class.getResource("/com/example/practicahotel/RootLayout.fxml"));
                 rootLayout = (BorderPane) loader.load();
 
                 // Show the scene containing the root layout.
                 Scene scene = new Scene(rootLayout);
-                primaryStage.setScene(scene);
-                primaryStage.show();
+                escenarioPrincipal.setScene(scene);
+                escenarioPrincipal.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         // Shows the person overview inside the root layout.
-        public void showPersonOverview() {
+        public void showClienteOverview() {
             try {
                 // Load person overview.
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("/Agenda/PersonOverview.fxml"));
+                loader.setLocation(MainApp.class.getResource("/com/example/practicahotel/HotelOverview.fxml"));
                 AnchorPane personOverview = (AnchorPane) loader.load();
 
                 // Set person overview into the center of root layout.
                 rootLayout.setCenter(personOverview);
 
                 // Give the controller access to the main app.
-                PersonOverviewController controller = loader.getController();
-                controller.setAgendaModelo(agendaModelo);
+                ClienteOverviewController controller = loader.getController();
+                controller.setClienteModelo(clienteModelo);
                 controller.setMainApp(this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        public boolean showPersonEditDialog(Person person) {
+        public boolean showPersonEditDialog(Cliente cliente) {
             try {
                 // Load the fxml file and create a new stage for the popup dialog.
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(MainApp.class.getResource("/Agenda/PersonEditDialog.fxml"));
+                loader.setLocation(MainApp.class.getResource("/com/example/practicahotel/PersonEditDialog.fxml"));
                 AnchorPane page = (AnchorPane) loader.load();
 
                 // Create the dialog Stage.
                 Stage dialogStage = new Stage();
                 dialogStage.setTitle("Editar persona");
                 dialogStage.initModality(Modality.WINDOW_MODAL);
-                dialogStage.initOwner(primaryStage);
+                dialogStage.initOwner(escenarioPrincipal);
                 Scene scene = new Scene(page);
                 dialogStage.setScene(scene);
 
                 // Set the person into the controller.
                 PersonEditDialogController controller = loader.getController();
                 controller.setDialogStage(dialogStage);
-                controller.setPerson(person);
+                controller.setCliente(cliente);
 
                 // Show the dialog and wait until the user closes it
                 dialogStage.showAndWait();
@@ -123,6 +123,5 @@ public class MainApp extends Application {
 
 
 
-
-    }
 }
+

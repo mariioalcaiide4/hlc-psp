@@ -40,7 +40,9 @@ public class ClienteOverviewController {
 
     private void showClienteDetails(Cliente cliente) {
         if (cliente != null) {
+
             //Rellenamos los Label con la información del cliente
+
             dniLabel.setText(cliente.getDni());
             firstNameLabel.setText(cliente.getNombre());
             lastNameLabel.setText(cliente.getApellido());
@@ -48,7 +50,9 @@ public class ClienteOverviewController {
             localidadLabel.setText(cliente.getLocalidad());
             provinciaLabel.setText(cliente.getProvincia());
         } else {
+
             //Cliente si es null, borramos texto
+
             dniLabel.setText("");
             firstNameLabel.setText("");
             lastNameLabel.setText("");
@@ -59,12 +63,13 @@ public class ClienteOverviewController {
     }
 
     @FXML
-    private void handleDeleteCliente() throws ExcepcionHotel {
+    private void handleDeleteClient() throws ExcepcionHotel {
         int selectedIndex = clienteTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             clienteTable.getItems().remove(selectedIndex);
             Cliente cl = clienteTable.getSelectionModel().getSelectedItem();
-            clienteModelo.borrarCliente(cl.getDni());
+            clienteModelo.borrarCliente(clienteTable.getItems().get(selectedIndex));
+            clienteTable.getItems().remove(selectedIndex);
         } else {
             //Sin seleccionar nada
             Alert alert = new Alert(Alert.AlertType.ERROR, "Seleccione una persona");
@@ -74,24 +79,24 @@ public class ClienteOverviewController {
 
 
     @FXML
-    private void handleNewPerson() throws ExcepcionHotel {
+    private void handleNewClient() throws ExcepcionHotel {
         Cliente tempCliente = new Cliente();
-        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        boolean okClicked = mainApp.showPersonEditDialog(tempCliente);
         if (okClicked) {
-            mainApp.getPersonData().add(tempPerson);
-            agendaModelo.anadirPersona(tempPerson);
-            showPersonDetails(tempPerson);
+            mainApp.getClientData().add(tempCliente);
+            clienteModelo.anadirCliente(tempCliente);
+            showClienteDetails(tempCliente);
         }
     }
 
     @FXML
-    private void handleEditPerson() throws ExcepcionPersona {
-        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+    private void handleEditClient() throws ExcepcionHotel {
+        Cliente selectedPerson = clienteTable.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
             if (okClicked) {
-                showPersonDetails(selectedPerson);
-                agendaModelo.editarPersona(selectedPerson);
+                showClienteDetails(selectedPerson);
+                clienteModelo.editarCliente(selectedPerson);
             }
 
         } else {
@@ -111,11 +116,11 @@ public class ClienteOverviewController {
                 cellData -> cellData.getValue().lastNameProperty());
 
         // Clear person details.
-        showPersonDetails(null);
+        showClienteDetails(null);
 
         // Listen for selection changes and show the person details when changed.
-        personTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+        clienteTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showClienteDetails(newValue));
     }
 
 
@@ -123,11 +128,11 @@ public class ClienteOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personTable.setItems(mainApp.getPersonData());
+        clienteTable.setItems(mainApp.getClientData());
     }
 
-    public void setAgendaModelo(AgendaModelo agendaModelo) {
-        this.agendaModelo = agendaModelo;
+    public void setClienteModelo(ClienteModelo clienteModelo) {
+        this.clienteModelo = clienteModelo;
     }
 }
 
@@ -135,4 +140,4 @@ public class ClienteOverviewController {
 
 
 
-}
+
