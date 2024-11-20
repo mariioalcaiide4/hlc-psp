@@ -64,18 +64,35 @@ public class ClienteOverviewController {
 
     @FXML
     private void handleDeleteClient() throws ExcepcionHotel {
+        // Obtener el índice seleccionado
         int selectedIndex = clienteTable.getSelectionModel().getSelectedIndex();
+
         if (selectedIndex >= 0) {
-            clienteTable.getItems().remove(selectedIndex);
-            Cliente cl = clienteTable.getSelectionModel().getSelectedItem();
-            clienteModelo.borrarCliente(clienteTable.getItems().get(selectedIndex));
-            clienteTable.getItems().remove(selectedIndex);
+            // Obtener el cliente seleccionado
+            Cliente clienteSeleccionado = clienteTable.getSelectionModel().getSelectedItem();
+
+            try {
+                // Eliminar de la base de datos
+                clienteModelo.borrarCliente(clienteSeleccionado);
+
+                // Eliminar del observable list
+                clienteTable.getItems().remove(clienteSeleccionado);
+
+                // Mensaje opcional de confirmación
+                System.out.println("Cliente eliminado correctamente.");
+            } catch (Exception e) {
+                // Manejo de excepciones en caso de error
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No se pudo eliminar el cliente.");
+                alert.show();
+                e.printStackTrace();
+            }
         } else {
-            //Sin seleccionar nada
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Seleccione una persona");
+            // Mostrar alerta si no hay selección
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Seleccione un cliente para eliminar.");
             alert.show();
         }
     }
+
 
 
     @FXML

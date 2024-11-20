@@ -1,5 +1,6 @@
 package com.example.practicahotel.modelo.repository.impl;
 
+import com.example.practicahotel.modelo.ClienteVO;
 import com.example.practicahotel.modelo.ExcepcionHotel;
 import com.example.practicahotel.modelo.ReservaVO;
 import com.example.practicahotel.modelo.repository.ClienteRepository;
@@ -25,15 +26,12 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
     public ReservaRepositoryImpl() {}
 
-
-
-
     public ArrayList<ReservaVO> ObtenerListaReservas() throws ExcepcionHotel {
         try {
             Connection connex = this.conexion.conectarBD();
             this.reservas = new ArrayList<>();
             this.statement = connex.createStatement();
-            this.sentencia = "SELECT * FROM `reservas`";
+            this.sentencia = "SELECT * FROM reservas";
             ResultSet rs = this.statement.executeQuery(this.sentencia);
 
             while (rs.next()) {
@@ -62,15 +60,56 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
 
     public void añadirReserva(ReservaVO var1) throws ExcepcionHotel {
-
+        try {
+            Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();
+            this.sentencia = "INSERT INTO reservas (id_reserva, fecha_entrada, fecha_salida, num_habitaciones, tipo_habitacion, fumador, regimen, id_cliente) VALUES ('"
+                    + var1.getId_reserva() + "','"
+                    + var1.getFecha_entrada() + "','"
+                    + var1.getFecha_salida() + "','"
+                    + var1.getNum_habitaciones() + "','"
+                    + var1.getTipo_habitacion() + "','"
+                    + var1.isFumador() + "','"
+                    + var1.getRegimen() + "','"
+                    + var1.getId_cliente() + "')";
+            this.statement.executeUpdate(this.sentencia);
+            this.statement.close();
+            this.conexion.desconectarBD(connex);
+        } catch (SQLException e) {
+            System.out.println("No se ha podido agregar la reserva: " + e);
+        }
     }
 
-    public void borrarReserva(Integer var1) throws ExcepcionHotel {
-
+    public void borrarReserva(Integer idReserva) throws ExcepcionHotel {
+        try {
+            Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();
+            String sql = String.format("DELETE FROM reservas WHERE id_reserva = '%d'", idReserva);
+            this.statement.executeUpdate(sql);
+            this.statement.close();
+            this.conexion.desconectarBD(connex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void editarReserva(ReservaVO var1) throws ExcepcionHotel {
-
+    public void editarReserva(ReservaVO personaVO) throws ExcepcionHotel {
+        try {
+            Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();
+            String sql = String.format("UPDATE clientes SET nombre = '%s', apellido = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = '%s'",
+                    personaVO.getFecha_entrada(),
+                    personaVO.getFecha_salida(),
+                    personaVO.getNum_habitaciones(),
+                    personaVO.getTipo_habitacion(),
+                    personaVO.(),
+                    personaVO.getDni());
+            this.statement.executeUpdate(sql);
+            this.statement.close();
+            this.conexion.desconectarBD(connex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int lastIdReserva() throws ExcepcionHotel {

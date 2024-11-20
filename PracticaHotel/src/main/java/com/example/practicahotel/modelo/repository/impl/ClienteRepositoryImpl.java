@@ -77,7 +77,8 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
-            String sql = String.format("DELETE FROM clientes WHERE dni = %d", idCliente);
+// Cambia %d por %s y rodea idCliente con comillas simples.
+            String sql = String.format("DELETE FROM clientes WHERE dni = '%s'", idCliente);
             this.statement.executeUpdate(sql);
             this.statement.close();
             this.conexion.desconectarBD(connex);
@@ -91,7 +92,13 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
-            String sql = String.format("UPDATE clientes SET nombre = '%s', apellido = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = %d", personaVO.getNombre(), personaVO.getApellido(), personaVO.getDireccion(), personaVO.getLocalidad(), personaVO.getProvincia(), personaVO.getDni());
+            String sql = String.format("UPDATE clientes SET nombre = '%s', apellido = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = '%s'",
+                    personaVO.getNombre(),
+                    personaVO.getApellido(),
+                    personaVO.getDireccion(),
+                    personaVO.getLocalidad(),
+                    personaVO.getProvincia(),
+                    personaVO.getDni());
             this.statement.executeUpdate(sql);
             this.statement.close();
             this.conexion.desconectarBD(connex);
