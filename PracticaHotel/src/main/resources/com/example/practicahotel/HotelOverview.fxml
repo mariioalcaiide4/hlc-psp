@@ -16,7 +16,7 @@
                         <TableView fx:id="clienteTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TableColumn fx:id="firstNameColumn" text="Nombre" />
-                                <TableColumn fx:id="lastNameColumn" text="Apellido" />
+                                <TableColumn fx:id="lastNameColumn" prefWidth="95.0" text="Apellido" />
                             </columns>
                         </TableView>
                     </children>
