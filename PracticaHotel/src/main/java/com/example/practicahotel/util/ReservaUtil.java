@@ -2,33 +2,33 @@ package com.example.practicahotel.util;
 
 import com.example.practicahotel.modelo.ReservaVO;
 import com.example.practicahotel.view.Cliente;
+import com.example.practicahotel.view.Reserva;
 
 import java.util.ArrayList;
 
-/*
+
 
 public class ReservaUtil {
-    public static ReservaVO parsePersonPersonVO (Cliente cliente){
-        if (cliente == null) {
+    public static ReservaVO parseReservaReservaVO (Reserva reserva){
+        if (reserva == null) {
             return null;
         }else {
-            return new ClienteVO(cliente.getDni(), cliente.getNombre(), cliente.getApellido(), cliente.getDireccion(), cliente.getLocalidad(), cliente.getProvincia());
+            return new ReservaVO(reserva.getId_Reserva(), reserva.getFecha_Entrada(), reserva.getFecha_Salida(), reserva.getNumHabitaciones(), reserva.getTipoHabitacion(), reserva.isFumador(), reserva.getRegimen(), reserva.getId_Cliente());
         }
     }
 
-    public static ArrayList<Cliente> parsePersonVOPerson(ArrayList<ClienteVO> listaClienteVO) {
-        if (listaClienteVO == null) {
+    public static ArrayList<Reserva> parseReservaVOReserva(ArrayList<ReservaVO> listaReservaVO) {
+        if (listaReservaVO == null) {
             return null;
         }else {
-            ArrayList<Cliente> listaClientes = new ArrayList<>();
-            for (ClienteVO clienteVO : listaClienteVO) {
-                listaClientes.add(new Cliente(clienteVO.getDni(), clienteVO.getNombre(), clienteVO.getApellido(), clienteVO.getDireccion(), clienteVO.getLocalidad(), clienteVO.getProvincia()));
+            ArrayList<Reserva> listaReservas = new ArrayList<>();
+            for (ReservaVO reservaVO : listaReservaVO) {
+                listaReservas.add(new Reserva(reservaVO.getId_reserva(), reservaVO.getFecha_entrada(), reservaVO.getFecha_salida(), reservaVO.getNum_habitaciones(), reservaVO.getTipo_habitacion(), reservaVO.isFumador(), reservaVO.getRegimen(), reservaVO.getId_cliente()));
             }
-            return listaClientes;
+            return listaReservas;
         }
     }
 
 }
 
 
-*/

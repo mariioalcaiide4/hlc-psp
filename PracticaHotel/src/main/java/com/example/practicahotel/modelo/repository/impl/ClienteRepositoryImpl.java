@@ -113,7 +113,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
 
         try {
             Connection connex = this.conexion.conectarBD();
-            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT dni FROM cliente ORDER BY dni DESC LIMIT 1");
+            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT dni FROM clientes ORDER BY dni DESC LIMIT 1");
             if (registro.next()) {
                 lastIdCliente = registro.getInt("");
             }

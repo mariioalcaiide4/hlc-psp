@@ -97,13 +97,14 @@ public class ReservaRepositoryImpl implements ReservaRepository {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
-            String sql = String.format("UPDATE clientes SET nombre = '%s', apellido = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = '%s'",
+            String sql = String.format("UPDATE reservas SET fecha_entrada = '%s', fecha_salida = '%s', num_habitaciones = '%s', tipo_habitacion = '%s', fumador = '%s',  regimen = '%s',  id_cliente = '%s' WHERE id_reserva = '%s'",
                     personaVO.getFecha_entrada(),
                     personaVO.getFecha_salida(),
                     personaVO.getNum_habitaciones(),
                     personaVO.getTipo_habitacion(),
-                    personaVO.(),
-                    personaVO.getDni());
+                    personaVO.isFumador(),
+                    personaVO.getRegimen(),
+                    personaVO.getId_cliente());
             this.statement.executeUpdate(sql);
             this.statement.close();
             this.conexion.desconectarBD(connex);
@@ -113,6 +114,21 @@ public class ReservaRepositoryImpl implements ReservaRepository {
     }
 
     public int lastIdReserva() throws ExcepcionHotel {
-        return 0;
+        int lastIdReserva = 0;
+
+        try {
+            Connection connex = this.conexion.conectarBD();
+            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT id_reserva FROM reservas ORDER BY id_reserva DESC LIMIT 1");
+            if (registro.next()) {
+                lastIdReserva = registro.getInt("");
+            }
+            registro.close();
+            this.statement.close();
+            this.conexion.desconectarBD(connex);
+        } catch (SQLException var5) {
+            throw new ExcepcionHotel("No se ha podido realizar la búsqueda del ID");
+        }
+        return lastIdReserva;
     }
 }
+
