@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.ClienteOverviewController">
+<AnchorPane prefHeight="850.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.ClienteOverviewController">
     <children>
         <SplitPane dividerPositions="0.3" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -15,8 +15,8 @@
                     <children>
                         <TableView fx:id="clienteTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn fx:id="firstNameColumn" text="Nombre" />
-                                <TableColumn fx:id="lastNameColumn" prefWidth="95.0" text="Apellido" />
+                                <TableColumn fx:id="firstNameColumn" prefWidth="114.0" resizable="false" text="Nombre" />
+                                <TableColumn fx:id="lastNameColumn" prefWidth="120.0" resizable="false" text="Apellido" />
                             </columns>
                         </TableView>
                     </children>
@@ -28,16 +28,16 @@
                         <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <!-- Datos personales -->
-                                <AnchorPane>
+                                <AnchorPane prefHeight="391.0" prefWidth="553.0">
                                     <children>
                                         <Label alignment="CENTER" text="Datos Personales del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                        <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                        <GridPane hgap="10" prefHeight="307.0" prefWidth="531.0" vgap="10" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="50.0">
                                             <columnConstraints>
-                                                <ColumnConstraints halignment="RIGHT" minWidth="80.0" />
-                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" />
+                                                <ColumnConstraints halignment="RIGHT" maxWidth="124.0" minWidth="80.0" prefWidth="124.0" />
+                                                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="435.0" minWidth="397.0" prefWidth="397.0" />
                                             </columnConstraints>
                                             <children>
-                                                <Label text="DNI" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="DNI     " GridPane.columnIndex="0" GridPane.rowIndex="0" />
                                                 <Label fx:id="dniLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                                                 <Label text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                                                 <Label fx:id="firstNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -51,12 +51,12 @@
                                                 <Label fx:id="provinciaLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                             </children>
                                  <rowConstraints>
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
-                                    <RowConstraints />
+                                    <RowConstraints minHeight="40.0" />
+                                    <RowConstraints minHeight="40.0" />
+                                    <RowConstraints minHeight="40.0" />
+                                    <RowConstraints minHeight="40.0" />
+                                    <RowConstraints minHeight="40.0" />
+                                    <RowConstraints minHeight="40.0" />
                                  </rowConstraints>
                                         </GridPane>
                                         <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -70,7 +70,7 @@
                                 </AnchorPane>
 
                                 <!-- Reservas del cliente -->
-                                <AnchorPane>
+                                <AnchorPane prefHeight="433.0" prefWidth="553.0">
                                     <children>
                                         <Label text="Reservas del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                         <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -80,6 +80,7 @@
                                                <Button text="Delete" />
                                            </children>
                                         </HBox>
+                              <ListView layoutX="14.0" layoutY="56.0" prefHeight="281.0" prefWidth="513.0" />
                                     </children>
                                 </AnchorPane>
                             </items>

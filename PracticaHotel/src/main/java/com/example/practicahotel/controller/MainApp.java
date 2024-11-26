@@ -4,6 +4,7 @@ import com.example.practicahotel.modelo.ClienteModelo;
 import com.example.practicahotel.modelo.ExcepcionHotel;
 import com.example.practicahotel.modelo.repository.impl.ClienteRepositoryImpl;
 import com.example.practicahotel.view.Cliente;
+import com.example.practicahotel.view.Reserva;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +107,7 @@ public class MainApp extends Application {
                 dialogStage.setScene(scene);
 
                 // Set the person into the controller.
-                PersonEditDialogController controller = loader.getController();
+                ClientEditDialogController controller = loader.getController();
                 controller.setDialogStage(dialogStage);
                 controller.setCliente(cliente);
 
@@ -120,6 +121,36 @@ public class MainApp extends Application {
             }
         }
 
+
+    public boolean showReservaEditDialog(Reserva reserva) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/com/example/practicahotel/ReservaEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Editar reserva");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(escenarioPrincipal);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            ReservarEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCliente(cliente);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 
 

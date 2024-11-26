@@ -18,18 +18,17 @@ public class ReservaModelo {
     }
 
     public void añadirReserva(Reserva reserva) throws ExcepcionHotel {
-        clienteRepository.añadirCliente(ClienteUtil.parsePersonPersonVO(cliente));
+        reservaRepository.añadirReserva(ReservaUtil.parseReservaReservaVO(reserva));
     }
 
-    public void editarCliente(Cliente cliente) throws ExcepcionHotel {
-        clienteRepository.editarCliente(ClienteUtil.parsePersonPersonVO(cliente));
-
-    }
-
-    public void borrarCliente(Cliente cliente) throws ExcepcionHotel {
-        reservaRepository.borrarReserva();
-
+    public void editarCliente(Reserva reserva) throws ExcepcionHotel {
+        reservaRepository.editarReserva(ReservaUtil.parseReservaReservaVO(reserva));
 
     }
 
+    public void borrarCliente(Reserva reserva) throws ExcepcionHotel {
+        reservaRepository.borrarReserva(reserva.getId_Reserva());
+
+
+    }
 }

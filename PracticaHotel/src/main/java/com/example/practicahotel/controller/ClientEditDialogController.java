@@ -6,7 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class PersonEditDialogController {
+public class ClientEditDialogController {
 
     @FXML
     private TextField dniField;
