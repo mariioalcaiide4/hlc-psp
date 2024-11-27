@@ -1,12 +1,13 @@
 package com.example.practicahotel.modelo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ReservaVO {
 
     int id_reserva;
-    Date fecha_entrada;
-    Date fecha_salida;
+    LocalDate fecha_entrada;
+    LocalDate fecha_salida;
     int num_habitaciones;
     String tipo_habitacion;
     boolean fumador;
@@ -15,7 +16,7 @@ public class ReservaVO {
 
     //Constructor por defecto
 
-    public ReservaVO(int id_reserva, Date fecha_entrada, Date fecha_salida, int num_habitaciones, String tipo_habitacion, boolean fumador, String regimen, String id_cliente) {
+    public ReservaVO(int id_reserva, LocalDate fecha_entrada, LocalDate fecha_salida, int num_habitaciones, String tipo_habitacion, boolean fumador, String regimen, String id_cliente) {
         this.id_reserva = id_reserva;
         this.fecha_entrada = fecha_entrada;
         this.fecha_salida = fecha_salida;
@@ -30,8 +31,8 @@ public class ReservaVO {
     //Getters y setters
 
     public int getId_reserva() {return id_reserva;}
-    public Date getFecha_entrada() {return fecha_entrada;}
-    public Date getFecha_salida() {return fecha_salida;}
+    public LocalDate getFecha_entrada() {return fecha_entrada;}
+    public LocalDate getFecha_salida() {return fecha_salida;}
     public int getNum_habitaciones() {return num_habitaciones;}
     public String getTipo_habitacion() {return tipo_habitacion;}
     public boolean isFumador() {return fumador;}
@@ -42,11 +43,11 @@ public class ReservaVO {
         this.id_reserva = id_reserva;
     }
 
-    public void setFecha_entrada(Date fecha_entrada) {
+    public void setFecha_entrada(LocalDate fecha_entrada) {
         this.fecha_entrada = fecha_entrada;
     }
 
-    public void setFecha_salida(Date fecha_salida) {
+    public void setFecha_salida(LocalDate fecha_salida) {
         this.fecha_salida = fecha_salida;
     }
 

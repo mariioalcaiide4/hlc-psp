@@ -122,7 +122,7 @@ public class MainApp extends Application {
         }
 
 
-    public boolean showReservaEditDialog(Reserva reserva) {
+    public boolean showReservaEditDialog(String id_cliente, Reserva reserva) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -140,7 +140,7 @@ public class MainApp extends Application {
             // Set the person into the controller.
             ReservarEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setCliente(cliente);
+            controller.setReserva(id_cliente, reserva);
 
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();

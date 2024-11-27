@@ -15,8 +15,8 @@
                     <children>
                         <TableView fx:id="clienteTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn fx:id="firstNameColumn" prefWidth="114.0" resizable="false" text="Nombre" />
-                                <TableColumn fx:id="lastNameColumn" prefWidth="120.0" resizable="false" text="Apellido" />
+                                <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="114.0" resizable="false" text="Nombre" />
+                                <TableColumn fx:id="lastNameColumn" editable="false" prefWidth="120.0" resizable="false" text="Apellido" />
                             </columns>
                         </TableView>
                     </children>
@@ -66,6 +66,8 @@
                                                <Button onAction="#handleDeleteClient" text="Delete" />
                                            </children>
                                         </HBox>
+                              <TextField fx:id="dniBuscarTextField" layoutX="381.0" layoutY="5.0" onAction="#handleBuscarDni" />
+                              <Label alignment="CENTER" layoutX="214.0" layoutY="10.0" prefHeight="19.0" prefWidth="154.0" text="Busqueda por DNI:" />
                                     </children>
                                 </AnchorPane>
 
@@ -75,12 +77,12 @@
                                         <Label text="Reservas del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                         <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                            <children>
-                                               <Button text="New..." />
-                                               <Button text="Edit..." />
-                                               <Button text="Delete" />
+                                               <Button onAction="#handleNewReserva" text="New..." />
+                                               <Button onAction="#handleEditReserva" text="Edit..." />
+                                               <Button onAction="#handleDeleteReserva" text="Delete" />
                                            </children>
                                         </HBox>
-                              <ListView layoutX="14.0" layoutY="56.0" prefHeight="281.0" prefWidth="513.0" />
+                              <ListView fx:id="listaReservas" layoutX="14.0" layoutY="56.0" prefHeight="281.0" prefWidth="513.0" />
                                     </children>
                                 </AnchorPane>
                             </items>

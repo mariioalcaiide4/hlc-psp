@@ -11,8 +11,8 @@ public class Reserva {
     //Atributos de la clase
 
     private final IntegerProperty id_reserva;
-    private final ObjectProperty<Date> fecha_entrada;
-    private final ObjectProperty<Date> fecha_salida;
+    private final ObjectProperty<LocalDate> fecha_entrada;
+    private final ObjectProperty<LocalDate> fecha_salida;
     private final IntegerProperty num_habitaciones;
     private final StringProperty tipo_habitacion;
     private final BooleanProperty fumador;
@@ -34,7 +34,7 @@ public class Reserva {
 
     }
 
-    public Reserva(int id_reserva, Date fecha_entrada, Date fecha_salida, int num_habitaciones, String tipo_habitacion, boolean fumador, String regimen, String id_cliente) {
+    public Reserva(int id_reserva, LocalDate fecha_entrada, LocalDate fecha_salida, int num_habitaciones, String tipo_habitacion, boolean fumador, String regimen, String id_cliente) {
         this.id_reserva = new SimpleIntegerProperty(id_reserva);
         this.fecha_entrada = new SimpleObjectProperty(fecha_entrada);
         this.fecha_salida = new SimpleObjectProperty(fecha_salida);
@@ -55,21 +55,21 @@ public class Reserva {
         return id_reserva;
     }
 
-    public Date getFecha_Entrada() {
+    public LocalDate getFecha_Entrada() {
         return fecha_entrada.get();
     }
-    public void setFecha_Entrada(Date fecha_entrada) {
+    public void setFecha_Entrada(LocalDate fecha_entrada) {
         this.fecha_entrada.set(fecha_entrada);}
-    public ObjectProperty<Date> fecha_entradaProperty() {
+    public ObjectProperty<LocalDate> fecha_entradaProperty() {
         return fecha_entrada;
     }
 
-    public Date getFecha_Salida() {
+    public LocalDate getFecha_Salida() {
         return fecha_salida.get();
     }
-    public void setFecha_Salida(Date fecha_salida) {
+    public void setFecha_Salida(LocalDate fecha_salida) {
         this.fecha_salida.set(fecha_salida);}
-    public ObjectProperty<Date> fecha_salidaProperty() {
+    public ObjectProperty<LocalDate> fecha_salidaProperty() {
         return fecha_salida;
     }
 

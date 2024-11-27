@@ -36,8 +36,8 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
             while (rs.next()) {
                 Integer id_reserva = rs.getInt("id_reserva");
-                Date fecha_entrada = rs.getDate("fecha_entrada");
-                Date fecha_salida = rs.getDate("fecha_salida");
+                LocalDate fecha_entrada = rs.getDate("fecha_entrada").toLocalDate();
+                LocalDate fecha_salida = rs.getDate("fecha_salida").toLocalDate();
                 Integer num_habitaciones = rs.getInt("num_habitaciones");
                 String tipo_habitacion = rs.getString("tipo_habitacion");
                 boolean fumador = rs.getBoolean("fumador");

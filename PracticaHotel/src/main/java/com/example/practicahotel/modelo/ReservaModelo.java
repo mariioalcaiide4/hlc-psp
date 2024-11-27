@@ -21,12 +21,12 @@ public class ReservaModelo {
         reservaRepository.añadirReserva(ReservaUtil.parseReservaReservaVO(reserva));
     }
 
-    public void editarCliente(Reserva reserva) throws ExcepcionHotel {
+    public void editarReserva(Reserva reserva) throws ExcepcionHotel {
         reservaRepository.editarReserva(ReservaUtil.parseReservaReservaVO(reserva));
 
     }
 
-    public void borrarCliente(Reserva reserva) throws ExcepcionHotel {
+    public void borrarReserva(Reserva reserva) throws ExcepcionHotel {
         reservaRepository.borrarReserva(reserva.getId_Reserva());
 
 

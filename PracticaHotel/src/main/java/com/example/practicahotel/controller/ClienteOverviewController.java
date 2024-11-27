@@ -2,12 +2,11 @@ package com.example.practicahotel.controller;
 
 import com.example.practicahotel.modelo.ClienteModelo;
 import com.example.practicahotel.modelo.ExcepcionHotel;
+import com.example.practicahotel.modelo.ReservaModelo;
 import com.example.practicahotel.view.Cliente;
+import com.example.practicahotel.view.Reserva;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class ClienteOverviewController {
     @FXML
@@ -30,11 +29,18 @@ public class ClienteOverviewController {
     @FXML
     private Label provinciaLabel;
 
+    @FXML
+    private ListView listaReservas;
+
+    @FXML
+    private TextField dniBuscarTextField;
+
 
     //Referenciamos al MainApp
 
     private MainApp mainApp;
     private ClienteModelo clienteModelo;
+    private ReservaModelo reservaModelo;
 
     public ClienteOverviewController(){}
 
@@ -123,6 +129,71 @@ public class ClienteOverviewController {
         }
     }
 
+    @FXML
+    private void handleNewReserva() {
+        Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
+        Reserva reservaNueva = new Reserva();
+        boolean okClicked = mainApp.showReservaEditDialog(selectedCliente.getDni(), reservaNueva);
+        if (okClicked) {
+            try {
+                reservaModelo.añadirReserva(reservaNueva);
+                listaReservas.getItems().add(reservaNueva);
+            } catch (ExcepcionHotel e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error al añadir la reserva: " + e.getMessage());
+                alert.show();
+            }
+        }
+    }
+
+
+    //Maneja la edición de una reserva seleccionada.
+
+    @FXML
+    private void handleEditReserva() {
+        Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
+        if (selectedCliente == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Debes seleccionar un cliente para añadir una reserva.");
+            alert.show();
+            return;
+        }
+        Reserva selectedReserva = (Reserva) listaReservas.getSelectionModel().getSelectedItem();
+        if (selectedReserva != null) {
+            boolean okClicked = mainApp.showReservaEditDialog(selectedCliente.getDni(), selectedReserva);
+            if (okClicked) {
+                try {
+                    reservaModelo.editarReserva(selectedReserva);
+                    listaReservas.refresh();
+                } catch (ExcepcionHotel e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error al modificar la reserva: " + e.getMessage());
+                    alert.show();
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Debes seleccionar una reserva para editarla");
+            alert.show();
+        }
+    }
+
+    @FXML
+    private Reserva handleDeleteReserva() {
+        int selectedIndex = listaReservas.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            Reserva selectedReserva = (Reserva) listaReservas.getItems().get(selectedIndex);
+            try {
+                reservaModelo.borrarReserva(selectedReserva);
+                listaReservas.getItems().remove(selectedIndex);
+            } catch (ExcepcionHotel e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error al eliminar la reserva: " + e.getMessage());
+                alert.show();
+            }
+            return selectedReserva;
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Debes seleccionar una reserva para borrarla");
+            alert.show();
+            return null;
+        }
+    }
+
 
     @FXML
     private void initialize() {
@@ -150,6 +221,53 @@ public class ClienteOverviewController {
 
     public void setClienteModelo(ClienteModelo clienteModelo) {
         this.clienteModelo = clienteModelo;
+    }
+
+    @FXML
+    private void handleBuscarDni() {
+        String dniBusqueda = dniBuscarTextField.getText().trim();
+        if (dniBusqueda.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Por favor, ingrese un DNI para buscar.");
+            alert.show();
+            return;
+        }
+
+        Cliente clienteEncontrado = null;
+        for (Cliente cliente : clienteTable.getItems()) {
+            if (cliente.getDni().equals(dniBusqueda)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        if (clienteEncontrado != null) {
+            clienteTable.getSelectionModel().select(clienteEncontrado);
+            showClienteDetails(clienteEncontrado);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No se encontró un cliente con el DNI proporcionado.");
+            alert.show();
+        }
+    }
+
+
+    private boolean esDniValido(String dni) {
+        // Comprobar que el DNI no está vacío y tiene el formato adecuado
+        if (dni == null || dni.length() != 9) {
+            return false;
+        }
+
+        // El formato del DNI español debe tener 8 números seguidos de una letra
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        String numero = dni.substring(0, 8);
+        char letra = dni.charAt(8);
+
+        try {
+            Integer.parseInt(numero); // Comprobar que los primeros 8 caracteres son números
+            int indice = Integer.parseInt(numero) % 23;
+            return letra == letras.charAt(indice); // Comprobar que la letra coincide con el cálculo
+        } catch (NumberFormatException e) {
+            return false; // Si no es un número válido, devolver false
+        }
     }
 }
 
