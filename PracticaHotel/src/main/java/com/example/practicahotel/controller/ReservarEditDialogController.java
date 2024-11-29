@@ -32,19 +32,14 @@ public class ReservarEditDialogController {
     private CheckBox fumadorCheckBox;
 
     @FXML
-    private ComboBox<String> regimenComboBox;
+    private ToggleButton desayunoRadioButton;
 
     @FXML
-    private ToggleGroup regimenToggleGroup;
+    private ToggleButton mediaPensionRadioButton;
 
     @FXML
-    private ToggleButton desayunoToggle;
+    private ToggleButton pensionCompletaRadioButton;
 
-    @FXML
-    private ToggleButton mediaPensionToggle;
-
-    @FXML
-    private ToggleButton pensionCompletaToggle;
 
     private regimen regimenSeleccionado;
 
@@ -65,13 +60,12 @@ public class ReservarEditDialogController {
         );
         tipoHabitacionComboBox.setItems(tipoHabitacionOptions);
 
-        ToggleGroup regimenToggleGroup = new ToggleGroup();
-        desayunoToggle.setToggleGroup(regimenToggleGroup);
-        mediaPensionToggle.setToggleGroup(regimenToggleGroup);
-        pensionCompletaToggle.setToggleGroup(regimenToggleGroup);
+        desayunoRadioButton.setUserData("DESAYUNO");
+        mediaPensionRadioButton.setUserData("MEDIA_PENSION");
+        pensionCompletaRadioButton.setUserData("PENSION_COMPLETA");
 
         regimenSeleccionado = regimen.DESAYUNO;
-        desayunoToggle.setSelected(true);
+        desayunoRadioButton.setSelected(true);
 
     }
 
@@ -90,7 +84,15 @@ public class ReservarEditDialogController {
         numeroHabitacionesComboBox.setValue(reserva.getNumHabitaciones());
         tipoHabitacionComboBox.setValue(reserva.getTipoHabitacion());
         fumadorCheckBox.setSelected(reserva.isFumador());
-        regimenToggleGroup.selectToggle(reserva.getRegimen());
+
+        String regimen = reserva.getRegimen(); // Ejemplo: "DESAYUNO", "MEDIA_PENSION"
+        if ("DESAYUNO".equals(regimen)) {
+            desayunoRadioButton.setSelected(true);
+        } else if ("MEDIA_PENSION".equals(regimen)) {
+            mediaPensionRadioButton.setSelected(true);
+        } else if ("PENSION_COMPLETA".equals(regimen)) {
+            pensionCompletaRadioButton.setSelected(true);
+        }
 
     }
 
@@ -109,11 +111,11 @@ public class ReservarEditDialogController {
             reserva.setTipoHabitacion(tipoHabitacionComboBox.getValue());
             reserva.setFumador(fumadorCheckBox.isSelected());
 
-            if (desayunoToggle.isSelected()){
+            if (desayunoRadioButton.isSelected()){
                 reserva.setRegimen(regimen.DESAYUNO.name());
-            } else if (mediaPensionToggle.isSelected()){
+            } else if (mediaPensionRadioButton.isSelected()){
                 reserva.setRegimen(regimen.MEDIA_PENSION.name());
-            } else if (pensionCompletaToggle.isSelected()){
+            } else if (pensionCompletaRadioButton.isSelected()){
                 reserva.setRegimen(regimen.PENSION_COMPLETO.name());
             }
 
@@ -149,9 +151,10 @@ public class ReservarEditDialogController {
         if (tipoHabitacionComboBox.getValue() == null || tipoHabitacionComboBox.getValue().isEmpty()) {
             errorMessage += "Tipo de habitación no válido!\n";
         }
-        //if (regimenComboBox.getValue() == null || regimenComboBox.getValue().isEmpty()) {
+
+        if (!desayunoRadioButton.isSelected() && !mediaPensionRadioButton.isSelected() && !pensionCompletaRadioButton.isSelected()) {
             errorMessage += "Tipo de alojamiento no válido!\n";
-       // }
+        }
 
         if (errorMessage.isEmpty()) {
             return true;
@@ -171,7 +174,9 @@ public class ReservarEditDialogController {
         fechaSalidaPicker.setValue(null);
         numeroHabitacionesComboBox.setValue(null);
         tipoHabitacionComboBox.setValue(null);
-        regimenToggleGroup.selectToggle(null);
+        desayunoRadioButton.setSelected(false);
+        mediaPensionRadioButton.setSelected(false);
+        pensionCompletaRadioButton.setSelected(false);
         fumadorCheckBox.setSelected(false);
 
     }

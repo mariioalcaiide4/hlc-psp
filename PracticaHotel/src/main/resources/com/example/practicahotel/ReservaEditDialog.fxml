@@ -31,22 +31,22 @@
       <ComboBox fx:id="tipoHabitacionComboBox" layoutX="516.0" layoutY="382.0" prefWidth="150.0" AnchorPane.leftAnchor="510.0" AnchorPane.rightAnchor="50.0" />
       <CheckBox fx:id="fumadorCheckBox" layoutX="170.0" layoutY="461.0" mnemonicParsing="false" text="Fumador" />
       <ComboBox fx:id="numeroHabitacionesComboBox" layoutX="59.0" layoutY="382.0" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="510.0" />
-      <VBox layoutX="250.0" layoutY="224.0" prefHeight="200.0" prefWidth="220.0">
+      <VBox fx:id="regimenToggleGroup" layoutX="250.0" layoutY="224.0" prefHeight="200.0" prefWidth="220.0">
          <children>
             <Label text="Regimen">
                <VBox.margin>
                   <Insets left="80.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <RadioButton mnemonicParsing="false" text="Desayuno">
+            <RadioButton fx:id="desayunoRadioButton" mnemonicParsing="false" text="Desayuno">
                <VBox.margin>
                   <Insets left="50.0" top="40.0" />
                </VBox.margin></RadioButton>
-            <RadioButton mnemonicParsing="false" text="Media pension">
+            <RadioButton fx:id="mediaPensionRadioButton" mnemonicParsing="false" text="Media pension">
                <VBox.margin>
                   <Insets left="50.0" top="25.0" />
                </VBox.margin></RadioButton>
-            <RadioButton mnemonicParsing="false" text="Pension completa">
+            <RadioButton fx:id="pensionCompletaRadioButton" mnemonicParsing="false" text="Pension completa">
                <VBox.margin>
                   <Insets left="50.0" top="25.0" />
                </VBox.margin></RadioButton>
