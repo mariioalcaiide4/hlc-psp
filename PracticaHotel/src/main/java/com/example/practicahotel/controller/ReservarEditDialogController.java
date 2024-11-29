@@ -1,5 +1,6 @@
 package com.example.practicahotel.controller;
 
+import com.example.practicahotel.modelo.regimen;
 import com.example.practicahotel.view.Reserva;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +34,20 @@ public class ReservarEditDialogController {
     @FXML
     private ComboBox<String> regimenComboBox;
 
+    @FXML
+    private ToggleGroup regimenToggleGroup;
+
+    @FXML
+    private ToggleButton desayunoToggle;
+
+    @FXML
+    private ToggleButton mediaPensionToggle;
+
+    @FXML
+    private ToggleButton pensionCompletaToggle;
+
+    private regimen regimenSeleccionado;
+
     private Stage dialogStage;
     private Reserva reserva;
     private boolean okClicked = false;
@@ -50,11 +65,14 @@ public class ReservarEditDialogController {
         );
         tipoHabitacionComboBox.setItems(tipoHabitacionOptions);
 
-        // Inicializa el ComboBox con las opciones de tipo de alojamiento.
-        //ObservableList<String> tipoAlojamientoOptions = FXCollections.observableArrayList(
-         //       "DESAYUNO", "MEDIA_PENSION", "PENSION_COMPLETA"
-        //);
-       // regimenComboBox.setItems(tipoAlojamientoOptions);
+        ToggleGroup regimenToggleGroup = new ToggleGroup();
+        desayunoToggle.setToggleGroup(regimenToggleGroup);
+        mediaPensionToggle.setToggleGroup(regimenToggleGroup);
+        pensionCompletaToggle.setToggleGroup(regimenToggleGroup);
+
+        regimenSeleccionado = regimen.DESAYUNO;
+        desayunoToggle.setSelected(true);
+
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -72,7 +90,8 @@ public class ReservarEditDialogController {
         numeroHabitacionesComboBox.setValue(reserva.getNumHabitaciones());
         tipoHabitacionComboBox.setValue(reserva.getTipoHabitacion());
         fumadorCheckBox.setSelected(reserva.isFumador());
-      //  regimenComboBox.setValue(reserva.getRegimen());
+        regimenToggleGroup.selectToggle(reserva.getRegimen());
+
     }
 
     public boolean isOkClicked() {
@@ -89,7 +108,14 @@ public class ReservarEditDialogController {
             reserva.setNum_Habitaciones(numeroHabitacionesComboBox.getValue());
             reserva.setTipoHabitacion(tipoHabitacionComboBox.getValue());
             reserva.setFumador(fumadorCheckBox.isSelected());
-        //    reserva.setRegimen(regimenComboBox.getValue());
+
+            if (desayunoToggle.isSelected()){
+                reserva.setRegimen(regimen.DESAYUNO.name());
+            } else if (mediaPensionToggle.isSelected()){
+                reserva.setRegimen(regimen.MEDIA_PENSION.name());
+            } else if (pensionCompletaToggle.isSelected()){
+                reserva.setRegimen(regimen.PENSION_COMPLETO.name());
+            }
 
             okClicked = true;
             dialogStage.close();
@@ -145,7 +171,7 @@ public class ReservarEditDialogController {
         fechaSalidaPicker.setValue(null);
         numeroHabitacionesComboBox.setValue(null);
         tipoHabitacionComboBox.setValue(null);
-       // regimenComboBox.setValue(null);
+        regimenToggleGroup.selectToggle(null);
         fumadorCheckBox.setSelected(false);
 
     }

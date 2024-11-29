@@ -132,6 +132,13 @@ public class ClienteOverviewController {
     @FXML
     private void handleNewReserva() {
         Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
+        if (selectedCliente == null) {
+            // Mostrar una alerta si no hay selección
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Debes seleccionar un cliente para añadir una reserva.");
+            alert.show();
+            return; // Salir del método si no hay cliente seleccionado
+        }
+
         Reserva reservaNueva = new Reserva();
         boolean okClicked = mainApp.showReservaEditDialog(selectedCliente.getDni(), reservaNueva);
         if (okClicked) {
