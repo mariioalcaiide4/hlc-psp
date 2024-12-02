@@ -2,7 +2,9 @@ package com.example.practicahotel.controller;
 
 import com.example.practicahotel.modelo.ClienteModelo;
 import com.example.practicahotel.modelo.ExcepcionHotel;
+import com.example.practicahotel.modelo.ReservaModelo;
 import com.example.practicahotel.modelo.repository.impl.ClienteRepositoryImpl;
+import com.example.practicahotel.modelo.repository.impl.ReservaRepositoryImpl;
 import com.example.practicahotel.view.Cliente;
 import com.example.practicahotel.view.Reserva;
 import javafx.application.Application;
@@ -21,24 +23,18 @@ import java.util.ArrayList;
 public class MainApp extends Application {
     private ObservableList<Cliente> clienteData = FXCollections.observableArrayList();
     ClienteModelo clienteModelo;
+    ReservaModelo reservaModelo;
 
     public MainApp() throws ExcepcionHotel {
             ClienteRepositoryImpl clienteRepository = new ClienteRepositoryImpl();
+            ReservaRepositoryImpl reservaRepository = new ReservaRepositoryImpl();
             clienteModelo = new ClienteModelo();
+            reservaModelo = new ReservaModelo();
             clienteModelo.setClienteRepository(clienteRepository);
+            reservaModelo.setReservaRepository(reservaRepository);
             ArrayList<Cliente> listaClientes = clienteModelo.obtenerClientes();
             clienteData.addAll(listaClientes);
 
-            // Add some sample data
-            //personData.add(new Person("Pikiko", "Maravilla"));
-            //personData.add(new Person("Ruth", "Mueller"));
-            //personData.add(new Person("Heinz", "Kurz"));
-            //personData.add(new Person("Cornelia", "Meier"));
-            //personData.add(new Person("Werner", "Meyer"));
-            //personData.add(new Person("Lydia", "Kunz"));
-            //personData.add(new Person("Anna", "Best"));
-            //personData.add(new Person("Stefan", "Meier"));
-            //personData.add(new Person("Martin", "Mueller"));
         }
 
         public ObservableList<Cliente> getClientData() {
@@ -85,7 +81,10 @@ public class MainApp extends Application {
                 // Give the controller access to the main app.
                 ClienteOverviewController controller = loader.getController();
                 controller.setClienteModelo(clienteModelo);
+                controller.setReservaModelo(reservaModelo);
                 controller.setMainApp(this);
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

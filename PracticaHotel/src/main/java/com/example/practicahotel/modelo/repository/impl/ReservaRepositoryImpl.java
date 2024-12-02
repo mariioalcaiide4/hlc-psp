@@ -5,10 +5,10 @@ import com.example.practicahotel.modelo.ExcepcionHotel;
 import com.example.practicahotel.modelo.ReservaVO;
 import com.example.practicahotel.modelo.repository.ClienteRepository;
 import com.example.practicahotel.modelo.repository.ReservaRepository;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +60,82 @@ public class ReservaRepositoryImpl implements ReservaRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public ObservableList<ReservaVO> RelacionClienteReservas() throws ExcepcionHotel {
+        return null;
+    }
+
+    public ObservableList<ReservaVO> RelacionClienteReservas(String id_cliente) throws ExcepcionHotel {
+        ObservableList<ReservaVO> reservasList = FXCollections.observableArrayList();
+        Connection connex = null;
+        try {
+            connex = this.conexion.conectarBD();
+            this.sentencia = "SELECT * FROM reservas WHERE id_cliente = ?";
+            PreparedStatement preparedStatement = connex.prepareStatement(this.sentencia);
+            preparedStatement.setString(1, id_cliente);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Integer id_reserva = rs.getInt("id_reserva");
+                java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
+                java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
+                LocalDate fecha_entrada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
+                LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
+
+                Integer num_habitaciones = rs.getInt("num_habitaciones");
+                String tipo_habitacion = rs.getString("tipo_habitacion");
+                boolean fumador = rs.getBoolean("fumador");
+                String regimen = rs.getString("regimen");
+
+                ReservaVO reserva = new ReservaVO(id_reserva, fecha_entrada, fecha_salida, num_habitaciones, tipo_habitacion, fumador, regimen, id_cliente);
+                reservasList.add(reserva);
+            }
+        } catch (SQLException e) {
+            throw new ExcepcionHotel("Error al obtener las reservas del cliente: " + e.getMessage());
+        }
+        return reservasList;
+    }
+
+    /*public ObservableList<ReservaVO> obtenerListaReservasCliente(String dni_cliente2) throws ExcepcionHotel {
+        ObservableList<ReservaVO> reservas = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM reservas WHERE dni_cliente = ?";
+
+        try (Connection conn = this.conexion.conectarBD();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, dni_cliente2); // Evitar inyección SQL y asegurar la consulta.
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Integer id_reserva = rs.getInt("id_reserva");
+
+                    // Conversión de java.sql.Date a LocalDate
+                    java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
+                    java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
+
+                    LocalDate fecha_llegada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
+                    LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
+
+                    Integer num_habitaciones = rs.getInt("num_habitaciones");
+                    String tipo_habitacion = rs.getString("tipo_habitacion");
+                    boolean fumador = rs.getBoolean("fumador");
+                    String tipo_alojamiento = rs.getString("tipo_alojamiento");
+                    String dni_cliente = rs.getString("dni_cliente");
+
+                    ReservaVO reserva = new ReservaVO(id_reserva, fecha_llegada, fecha_salida, num_habitaciones, tipo_habitacion, fumador, tipo_alojamiento, dni_cliente);
+                    reservas.add(reserva);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new ExcepcionHotel("No se ha podido realizar la operación");
+        }
+
+        return reservas;
+    }*/
+
 
 
     public void añadirReserva(ReservaVO var1) throws ExcepcionHotel {

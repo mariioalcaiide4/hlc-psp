@@ -226,8 +226,11 @@ public class ClienteOverviewController {
         clienteTable.setItems(mainApp.getClientData());
     }
 
-    public void setController(ClienteModelo clienteModelo, ReservaModelo reservaModelo) {
+    public void setClienteModelo(ClienteModelo clienteModelo) {
         this.clienteModelo = clienteModelo;
+    }
+
+    public void setReservaModelo(ReservaModelo reservaModelo){
         this.reservaModelo = reservaModelo;
     }
 
@@ -263,7 +266,6 @@ public class ClienteOverviewController {
         if (dni == null || dni.length() != 9) {
             return false;
         }
-
         // El formato del DNI español debe tener 8 números seguidos de una letra
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
         String numero = dni.substring(0, 8);
