@@ -36,8 +36,11 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
             while (rs.next()) {
                 Integer id_reserva = rs.getInt("id_reserva");
-                LocalDate fecha_entrada = rs.getDate("fecha_entrada").toLocalDate();
-                LocalDate fecha_salida = rs.getDate("fecha_salida").toLocalDate();
+                java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
+                java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
+                LocalDate fecha_entrada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
+                LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
+
                 Integer num_habitaciones = rs.getInt("num_habitaciones");
                 String tipo_habitacion = rs.getString("tipo_habitacion");
                 boolean fumador = rs.getBoolean("fumador");
@@ -97,7 +100,7 @@ public class ReservaRepositoryImpl implements ReservaRepository {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
-            String sql = String.format("UPDATE reservas SET fecha_entrada = '%s', fecha_salida = '%s', num_habitaciones = '%s', tipo_habitacion = '%s', fumador = '%s',  regimen = '%s',  id_cliente = '%s' WHERE id_reserva = '%s'",
+            String sql = String.format("UPDATE reservas SET fecha_entrada = '%s', fecha_salida = '%s', num_habitaciones = '%s', tipo_habitacion = '%s', fumador = '%s',  regimen = '%s',  id_cliente = '%s' WHERE id_cliente = '%s'",
                     personaVO.getFecha_entrada(),
                     personaVO.getFecha_salida(),
                     personaVO.getNum_habitaciones(),
@@ -118,7 +121,7 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
         try {
             Connection connex = this.conexion.conectarBD();
-            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT id_reserva FROM reservas ORDER BY id_reserva DESC LIMIT 1");
+            this.statement = connex.createStatement();            ResultSet registro = statement.executeQuery("SELECT id_reserva FROM reservas ORDER BY id_cliente DESC LIMIT 1");
             if (registro.next()) {
                 lastIdReserva = registro.getInt("");
             }

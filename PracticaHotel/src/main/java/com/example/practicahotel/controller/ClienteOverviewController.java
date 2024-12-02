@@ -226,8 +226,9 @@ public class ClienteOverviewController {
         clienteTable.setItems(mainApp.getClientData());
     }
 
-    public void setClienteModelo(ClienteModelo clienteModelo) {
+    public void setController(ClienteModelo clienteModelo, ReservaModelo reservaModelo) {
         this.clienteModelo = clienteModelo;
+        this.reservaModelo = reservaModelo;
     }
 
     @FXML
