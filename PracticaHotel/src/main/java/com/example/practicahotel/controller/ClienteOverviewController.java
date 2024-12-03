@@ -5,6 +5,8 @@ import com.example.practicahotel.modelo.ExcepcionHotel;
 import com.example.practicahotel.modelo.ReservaModelo;
 import com.example.practicahotel.view.Cliente;
 import com.example.practicahotel.view.Reserva;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -216,6 +218,10 @@ public class ClienteOverviewController {
         // Listen for selection changes and show the person details when changed.
         clienteTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showClienteDetails(newValue));
+
+        clienteTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> handleClienteSeleccionado()
+        );
     }
 
 
@@ -279,6 +285,34 @@ public class ClienteOverviewController {
             return false; // Si no es un número válido, devolver false
         }
     }
+
+    @FXML
+    private void handleClienteSeleccionado() {
+        // Obtener el cliente seleccionado
+        Cliente selectedCliente = clienteTable.getSelectionModel().getSelectedItem();
+
+        if (selectedCliente != null) {
+            // Actualizar las reservas en el ListView con las reservas del cliente seleccionado
+            actualizarReservasParaCliente(selectedCliente.getDni());
+        }
+    }
+
+    private void actualizarReservasParaCliente(String dniCliente) {
+        ObservableList<Reserva> reservas = FXCollections.observableArrayList();
+
+        // Obtener las reservas del cliente usando el modelo de reserva
+        try {
+            reservas = reservaModelo.setReservas(dniCliente);  // Llamamos al modelo de reservas
+            listaReservas.setItems(reservas);  // Actualizamos el ListView con las reservas del cliente
+        } catch (ExcepcionHotel e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error al obtener las reservas: " + e.getMessage());
+            alert.show();
+        }
+    }
+
+
+
+
 }
 
 

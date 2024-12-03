@@ -10,7 +10,7 @@ public interface ReservaRepository {
 
     ArrayList<ReservaVO> ObtenerListaReservas() throws ExcepcionHotel;
 
-    ObservableList<ReservaVO> RelacionClienteReservas() throws ExcepcionHotel;
+    ObservableList<ReservaVO> RelacionClienteReservas(String id_cliente) throws ExcepcionHotel;
 
     void añadirReserva(ReservaVO var1) throws ExcepcionHotel;
 

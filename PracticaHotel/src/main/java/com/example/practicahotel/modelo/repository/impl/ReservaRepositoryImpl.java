@@ -1,9 +1,7 @@
 package com.example.practicahotel.modelo.repository.impl;
 
-import com.example.practicahotel.modelo.ClienteVO;
 import com.example.practicahotel.modelo.ExcepcionHotel;
 import com.example.practicahotel.modelo.ReservaVO;
-import com.example.practicahotel.modelo.repository.ClienteRepository;
 import com.example.practicahotel.modelo.repository.ReservaRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +9,6 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ReservaRepositoryImpl implements ReservaRepository {
     private ConexionJDBC conexion = new ConexionJDBC();
@@ -62,10 +59,6 @@ public class ReservaRepositoryImpl implements ReservaRepository {
     }
 
     @Override
-    public ObservableList<ReservaVO> RelacionClienteReservas() throws ExcepcionHotel {
-        return null;
-    }
-
     public ObservableList<ReservaVO> RelacionClienteReservas(String id_cliente) throws ExcepcionHotel {
         ObservableList<ReservaVO> reservasList = FXCollections.observableArrayList();
         Connection connex = null;
@@ -97,58 +90,19 @@ public class ReservaRepositoryImpl implements ReservaRepository {
         return reservasList;
     }
 
-    /*public ObservableList<ReservaVO> obtenerListaReservasCliente(String dni_cliente2) throws ExcepcionHotel {
-        ObservableList<ReservaVO> reservas = FXCollections.observableArrayList();
-
-        String sql = "SELECT * FROM reservas WHERE dni_cliente = ?";
-
-        try (Connection conn = this.conexion.conectarBD();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, dni_cliente2); // Evitar inyección SQL y asegurar la consulta.
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Integer id_reserva = rs.getInt("id_reserva");
-
-                    // Conversión de java.sql.Date a LocalDate
-                    java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
-                    java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
-
-                    LocalDate fecha_llegada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
-                    LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
-
-                    Integer num_habitaciones = rs.getInt("num_habitaciones");
-                    String tipo_habitacion = rs.getString("tipo_habitacion");
-                    boolean fumador = rs.getBoolean("fumador");
-                    String tipo_alojamiento = rs.getString("tipo_alojamiento");
-                    String dni_cliente = rs.getString("dni_cliente");
-
-                    ReservaVO reserva = new ReservaVO(id_reserva, fecha_llegada, fecha_salida, num_habitaciones, tipo_habitacion, fumador, tipo_alojamiento, dni_cliente);
-                    reservas.add(reserva);
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new ExcepcionHotel("No se ha podido realizar la operación");
-        }
-
-        return reservas;
-    }*/
-
-
 
     public void añadirReserva(ReservaVO var1) throws ExcepcionHotel {
         try {
             Connection connex = this.conexion.conectarBD();
             this.statement = connex.createStatement();
+            int fumadorValue = var1.isFumador() ? 1 : 0;
             this.sentencia = "INSERT INTO reservas (id_reserva, fecha_entrada, fecha_salida, num_habitaciones, tipo_habitacion, fumador, regimen, id_cliente) VALUES ('"
                     + var1.getId_reserva() + "','"
                     + var1.getFecha_entrada() + "','"
                     + var1.getFecha_salida() + "','"
                     + var1.getNum_habitaciones() + "','"
-                    + var1.getTipo_habitacion() + "','"
-                    + var1.isFumador() + "','"
+                    + var1.getTipo_habitacion() + "',"
+                    + fumadorValue + ",'" // Inserta 1 o 0 en lugar de 'true' o 'false'
                     + var1.getRegimen() + "','"
                     + var1.getId_cliente() + "')";
             this.statement.executeUpdate(this.sentencia);
@@ -175,22 +129,33 @@ public class ReservaRepositoryImpl implements ReservaRepository {
     public void editarReserva(ReservaVO personaVO) throws ExcepcionHotel {
         try {
             Connection connex = this.conexion.conectarBD();
-            this.statement = connex.createStatement();
-            String sql = String.format("UPDATE reservas SET fecha_entrada = '%s', fecha_salida = '%s', num_habitaciones = '%s', tipo_habitacion = '%s', fumador = '%s',  regimen = '%s',  id_cliente = '%s' WHERE id_cliente = '%s'",
-                    personaVO.getFecha_entrada(),
-                    personaVO.getFecha_salida(),
-                    personaVO.getNum_habitaciones(),
-                    personaVO.getTipo_habitacion(),
-                    personaVO.isFumador(),
-                    personaVO.getRegimen(),
-                    personaVO.getId_cliente());
-            this.statement.executeUpdate(sql);
-            this.statement.close();
+            String sql = "UPDATE reservas SET fecha_entrada = ?, fecha_salida = ?, num_habitaciones = ?, tipo_habitacion = ?, fumador = ?, regimen = ?, id_cliente = ? WHERE id_reserva = ?";
+
+            // Usamos PreparedStatement para evitar errores de formato y de seguridad
+            PreparedStatement preparedStatement = connex.prepareStatement(sql);
+
+            // Asignar los valores de la reserva al PreparedStatement
+            preparedStatement.setDate(1, Date.valueOf(personaVO.getFecha_entrada()));  // Fecha entrada
+            preparedStatement.setDate(2, Date.valueOf(personaVO.getFecha_salida()));   // Fecha salida
+            preparedStatement.setInt(3, personaVO.getNum_habitaciones());              // Número de habitaciones
+            preparedStatement.setString(4, personaVO.getTipo_habitacion());            // Tipo de habitación
+            preparedStatement.setInt(5, personaVO.isFumador() ? 1 : 0);                // Fumador (1 o 0)
+            preparedStatement.setString(6, personaVO.getRegimen());                    // Régimen
+            preparedStatement.setString(7, personaVO.getId_cliente());                 // ID Cliente
+            preparedStatement.setInt(8, personaVO.getId_reserva());                    // ID Reserva para la condición WHERE
+
+            // Ejecutar la actualización
+            preparedStatement.executeUpdate();
+
+            // Cerrar la conexión y la sentencia
+            preparedStatement.close();
             this.conexion.desconectarBD(connex);
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ExcepcionHotel("Error al editar la reserva: " + e.getMessage());
         }
     }
+
 
     public int lastIdReserva() throws ExcepcionHotel {
         int lastIdReserva = 0;

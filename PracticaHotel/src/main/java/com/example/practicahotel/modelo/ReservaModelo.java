@@ -1,57 +1,51 @@
 package com.example.practicahotel.modelo;
 
 import com.example.practicahotel.modelo.repository.ReservaRepository;
-import com.example.practicahotel.util.ClienteUtil;
-import java.util.ArrayList;
-
 import com.example.practicahotel.util.ReservaUtil;
-import com.example.practicahotel.view.Cliente;
 import com.example.practicahotel.view.Reserva;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class ReservaModelo {
-    ReservaRepository reservaRepository;
-    public void setReservaRepository(ReservaRepository reservaRepository) {this.reservaRepository = reservaRepository;}
+    private ReservaRepository reservaRepository;
 
-    public ArrayList<Reserva> obtenerReservas() throws ExcepcionHotel{
-        ArrayList<ReservaVO> listillaReservas = reservaRepository.ObtenerListaReservas();
-        return ReservaUtil.parseReservaVOReserva(listillaReservas);
+    // Setter para la dependencia ReservaRepository
+    public void setReservaRepository(ReservaRepository reservaRepository) {
+        this.reservaRepository = reservaRepository;
     }
 
-    public ObservableList<Reserva> RelacionClienteReservas() throws ExcepcionHotel{
-        ArrayList<ReservaVO> listillaReservas1 = (ArrayList<ReservaVO>) reservaRepository.RelacionClienteReservas();
-        return (ObservableList<Reserva>) ReservaUtil.parseReservaVOReserva(listillaReservas1);
-    }
-
-    /*
-     public ObservableList<Reserva> setReservas(String dni) {
+    // Método para obtener las reservas de un cliente
+    public ObservableList<Reserva> setReservas(String id_cl) {
         try {
-            ObservableList<ReservaVO> reservasVO = this.reservaRepository.obtenerListaReservasCliente(dni);
-            return ReservaUtil.conversionReserva(reservasVO); // Convierte las reservas a la forma esperada
+            // Obtener la lista de reservas en formato VO (Valor Object)
+            ObservableList<ReservaVO> listaReservas = this.reservaRepository.RelacionClienteReservas(id_cl);
+
+            // Convertir la lista VO a la lista de vista (Reserva)
+            return (ObservableList<Reserva>) ReservaUtil.parseReservaVOReserva((ArrayList<ReservaVO>) listaReservas);
         } catch (ExcepcionHotel e) {
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error de conexión");
-            alerta.setHeaderText("La base de datos no está conectada.");
-            alerta.setContentText(e.getMessage());
-            alerta.showAndWait();
+            e.printStackTrace(); // Imprime el error en consola
             return FXCollections.emptyObservableList(); // Devuelve una lista vacía en caso de error
         }
     }
-     */
 
 
+    // Método para añadir una reserva
     public void añadirReserva(Reserva reserva) throws ExcepcionHotel {
+        // Convertir la reserva de vista a VO y pasársela al repositorio
         reservaRepository.añadirReserva(ReservaUtil.parseReservaReservaVO(reserva));
     }
 
+    // Método para editar una reserva
     public void editarReserva(Reserva reserva) throws ExcepcionHotel {
+        // Convertir la reserva de vista a VO y pasársela al repositorio
         reservaRepository.editarReserva(ReservaUtil.parseReservaReservaVO(reserva));
-
     }
 
+    // Método para borrar una reserva
     public void borrarReserva(Reserva reserva) throws ExcepcionHotel {
+        // Pasar el ID de la reserva al repositorio para borrarla
         reservaRepository.borrarReserva(reserva.getId_Reserva());
-
-
     }
 }
