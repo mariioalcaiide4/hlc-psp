@@ -6,17 +6,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="850.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.ClienteOverviewController">
+<AnchorPane prefHeight="817.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.ClienteOverviewController">
     <children>
         <SplitPane dividerPositions="0.3" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <!-- Panel izquierdo: Tabla de clientes -->
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="207.0">
                     <children>
-                        <TableView fx:id="clienteTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="clienteTable" onMouseClicked="#handleClienteSeleccionado" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
-                                <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="114.0" resizable="false" text="Nombre" />
-                                <TableColumn fx:id="lastNameColumn" editable="false" prefWidth="120.0" resizable="false" text="Apellido" />
+                                <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="144.0" resizable="false" text="Nombre" />
+                                <TableColumn fx:id="lastNameColumn" editable="false" prefWidth="150.0" resizable="false" text="Apellido" />
                             </columns>
                         </TableView>
                     </children>
@@ -25,7 +25,7 @@
                 <!-- Panel derecho: Detalles del cliente y reservas -->
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
-                        <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <SplitPane dividerPositions="0.38446969696969696" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <items>
                                 <!-- Datos personales -->
                                 <AnchorPane prefHeight="391.0" prefWidth="553.0">
@@ -72,7 +72,7 @@
                                 </AnchorPane>
 
                                 <!-- Reservas del cliente -->
-                                <AnchorPane prefHeight="433.0" prefWidth="553.0">
+                                <AnchorPane prefHeight="298.0" prefWidth="693.0">
                                     <children>
                                         <Label text="Reservas del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                         <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -82,7 +82,7 @@
                                                <Button onAction="#handleDeleteReserva" text="Delete" />
                                            </children>
                                         </HBox>
-                              <ListView fx:id="listaReservas" layoutX="14.0" layoutY="41.0" prefHeight="334.0" prefWidth="532.0" />
+                              <ListView fx:id="listaReservas" layoutX="14.0" layoutY="41.0" prefHeight="296.0" prefWidth="657.0" />
                                     </children>
                                 </AnchorPane>
                             </items>

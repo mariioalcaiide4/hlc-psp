@@ -1,33 +1,30 @@
 package com.example.practicahotel.modelo;
 
 import com.example.practicahotel.modelo.repository.ReservaRepository;
+import com.example.practicahotel.modelo.repository.impl.ConexionJDBC;
 import com.example.practicahotel.util.ReservaUtil;
 import com.example.practicahotel.view.Reserva;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class ReservaModelo {
     private ReservaRepository reservaRepository;
+    private ConexionJDBC conexion = new ConexionJDBC();
 
     // Setter para la dependencia ReservaRepository
     public void setReservaRepository(ReservaRepository reservaRepository) {
         this.reservaRepository = reservaRepository;
     }
 
-    // Método para obtener las reservas de un cliente
-    public ObservableList<Reserva> setReservas(String id_cl) {
-        try {
-            // Obtener la lista de reservas en formato VO (Valor Object)
-            ObservableList<ReservaVO> listaReservas = this.reservaRepository.RelacionClienteReservas(id_cl);
-
-            // Convertir la lista VO a la lista de vista (Reserva)
-            return (ObservableList<Reserva>) ReservaUtil.parseReservaVOReserva((ArrayList<ReservaVO>) listaReservas);
-        } catch (ExcepcionHotel e) {
-            e.printStackTrace(); // Imprime el error en consola
-            return FXCollections.emptyObservableList(); // Devuelve una lista vacía en caso de error
-        }
+    public ObservableList<Reserva> setReservas(String idCliente) throws ExcepcionHotel {
+        ObservableList<ReservaVO> listillaReservas = this.reservaRepository.RelacionClienteReservas(idCliente);
+        return ReservaUtil.parseReservaVOReserva(listillaReservas);
     }
 
 

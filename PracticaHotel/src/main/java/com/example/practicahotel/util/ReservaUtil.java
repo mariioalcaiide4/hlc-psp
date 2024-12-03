@@ -3,12 +3,20 @@ package com.example.practicahotel.util;
 import com.example.practicahotel.modelo.ReservaVO;
 import com.example.practicahotel.view.Cliente;
 import com.example.practicahotel.view.Reserva;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
 
 
 public class ReservaUtil {
+    
+    static ObservableList<Reserva> listaReservas = FXCollections.observableArrayList();
+
+    {
+    };
+    
     public static ReservaVO parseReservaReservaVO (Reserva reserva){
         if (reserva == null) {
             return null;
@@ -17,11 +25,10 @@ public class ReservaUtil {
         }
     }
 
-    public static ArrayList<Reserva> parseReservaVOReserva(ArrayList<ReservaVO> listaReservaVO) {
+    public static ObservableList<Reserva> parseReservaVOReserva(ObservableList<ReservaVO> listaReservaVO) {
         if (listaReservaVO == null) {
             return null;
-        }else {
-            ArrayList<Reserva> listaReservas = new ArrayList<>();
+        } else {
             for (ReservaVO reservaVO : listaReservaVO) {
                 listaReservas.add(new Reserva(reservaVO.getId_reserva(), reservaVO.getFecha_entrada(), reservaVO.getFecha_salida(), reservaVO.getNum_habitaciones(), reservaVO.getTipo_habitacion(), reservaVO.isFumador(), reservaVO.getRegimen(), reservaVO.getId_cliente()));
             }

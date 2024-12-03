@@ -57,6 +57,10 @@ public class ClienteOverviewController {
             streetLabel.setText(cliente.getDireccion());
             localidadLabel.setText(cliente.getLocalidad());
             provinciaLabel.setText(cliente.getProvincia());
+
+            listaReservas.getItems().clear();
+            listaReservas.setItems(reservaModelo.setReservas(cliente.getDni()));
+
         } else {
 
             //Cliente si es null, borramos texto
@@ -219,9 +223,11 @@ public class ClienteOverviewController {
         clienteTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showClienteDetails(newValue));
 
-        clienteTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> handleClienteSeleccionado()
-        );
+        clienteTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                handleClienteSeleccionado();
+            }
+        });
     }
 
 
@@ -298,17 +304,15 @@ public class ClienteOverviewController {
     }
 
     private void actualizarReservasParaCliente(String dniCliente) {
-        ObservableList<Reserva> reservas = FXCollections.observableArrayList();
-
-        // Obtener las reservas del cliente usando el modelo de reserva
         try {
-            reservas = reservaModelo.setReservas(dniCliente);  // Llamamos al modelo de reservas
-            listaReservas.setItems(reservas);  // Actualizamos el ListView con las reservas del cliente
+            ObservableList<Reserva> reservas = reservaModelo.setReservas(dniCliente); // Devuelve ObservableList
+            listaReservas.setItems(reservas); // Lo asignas directamente al ListView
         } catch (ExcepcionHotel e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al obtener las reservas: " + e.getMessage());
             alert.show();
         }
     }
+
 
 
 

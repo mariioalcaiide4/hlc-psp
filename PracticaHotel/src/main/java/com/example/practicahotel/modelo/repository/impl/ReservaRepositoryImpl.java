@@ -33,9 +33,9 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
             while (rs.next()) {
                 Integer id_reserva = rs.getInt("id_reserva");
-                java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
+                java.sql.Date sqlFechaEntrada = rs.getDate("fecha_entrada");
                 java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
-                LocalDate fecha_entrada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
+                LocalDate fecha_entrada = sqlFechaEntrada != null ? sqlFechaEntrada.toLocalDate() : null;
                 LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
 
                 Integer num_habitaciones = rs.getInt("num_habitaciones");
@@ -71,9 +71,9 @@ public class ReservaRepositoryImpl implements ReservaRepository {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Integer id_reserva = rs.getInt("id_reserva");
-                java.sql.Date sqlFechaLlegada = rs.getDate("fecha_llegada");
+                java.sql.Date sqlFechaEntrada = rs.getDate("fecha_entrada");
                 java.sql.Date sqlFechaSalida = rs.getDate("fecha_salida");
-                LocalDate fecha_entrada = sqlFechaLlegada != null ? sqlFechaLlegada.toLocalDate() : null;
+                LocalDate fecha_entrada = sqlFechaEntrada != null ? sqlFechaEntrada.toLocalDate() : null;
                 LocalDate fecha_salida = sqlFechaSalida != null ? sqlFechaSalida.toLocalDate() : null;
 
                 Integer num_habitaciones = rs.getInt("num_habitaciones");
