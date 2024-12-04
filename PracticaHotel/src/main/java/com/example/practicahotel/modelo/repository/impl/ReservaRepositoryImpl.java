@@ -174,5 +174,30 @@ public class ReservaRepositoryImpl implements ReservaRepository {
         }
         return lastIdReserva;
     }
+
+    public int obtenerTotalHabitaciones(String tipoHabitacion) {
+        // Retorna el total de habitaciones disponibles (puedes usar valores estáticos)
+        switch (tipoHabitacion) {
+            case "doble":
+                return 80;
+            case "doble_individual":
+                return 20;
+            case "suite":
+                return 5;
+            case "suite_individual":
+                return 15;
+            default:
+                return 0;
+        }
+    }
+
+    public int obtenerHabitacionesOcupadas(String tipoHabitacion, LocalDate fechaActual) {
+        // Filtra las reservas activas para el tipo de habitación dado
+        return (int) reservas.stream()
+                .filter(reserva -> reserva.getTipo_habitacion().equals(tipoHabitacion))
+                .filter(reserva -> !reserva.getFecha_entrada().isAfter(fechaActual) && !reserva.getFecha_salida().isBefore(fechaActual))
+                .count();
+    }
 }
+
 

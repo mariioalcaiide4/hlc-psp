@@ -67,6 +67,53 @@ public class MainApp extends Application {
             }
         }
 
+    public void showVista(String vistaNombre) {
+        try {
+            // Construir la ruta del archivo FXML dinámicamente
+            String rutaFXML = String.format("/com/example/practicahotel/%s.fxml", vistaNombre);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(rutaFXML));
+            AnchorPane vista = loader.load();
+
+            // Colocar la vista cargada en el centro del rootLayout
+            rootLayout.setCenter(vista);
+
+            // Configurar el controlador, si es necesario
+            Object controller = loader.getController();
+            if (controller instanceof DobleController) {
+                ((DobleController) controller).setMainApp(this);
+                ((DobleController) controller).setReservaModelo(reservaModelo);
+            } else if (controller instanceof DobleIndividualController) {
+                ((DobleIndividualController) controller).setMainApp(this);
+                ((DobleIndividualController) controller).setReservaModelo(reservaModelo);
+            } else if (controller instanceof SuiteIndividualController) {
+                ((SuiteIndividualController) controller).setMainApp(this);
+                ((SuiteIndividualController) controller).setReservaModelo(reservaModelo);
+            } else if (controller instanceof SuiteController) {
+                ((SuiteController) controller).setMainApp(this);
+                ((SuiteController) controller).setReservaModelo(reservaModelo);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showVistaDoble() {
+        showVista("Doble");
+    }
+
+    public void showVistaDobleIndividual() {
+        showVista("DobleIndividual");
+    }
+
+    public void showVistaSuite() {
+        showVista("Suite");
+    }
+
+    public void showVistaSuiteIndividual() {
+        showVista("SuiteIndividual");
+    }
+
         // Shows the person overview inside the root layout.
         public void showClienteOverview() {
             try {

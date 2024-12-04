@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1200.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicahotel.controller.RootLayoutController">
    <top>
       <MenuBar stylesheets="@Styles.css" BorderPane.alignment="CENTER">
         <menus>
@@ -21,10 +21,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Habitaciones">
             <items>
-              <MenuItem mnemonicParsing="false" text="Doble de Uso Individual" />
-                  <MenuItem mnemonicParsing="false" text="Doble" />
-                  <MenuItem mnemonicParsing="false" text="Suite Junior" />
-                  <MenuItem mnemonicParsing="false" text="Suite" />
+              <MenuItem mnemonicParsing="false" onAction="#handleShowVistaDobleIndividual" text="Doble de Uso Individual" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowVistaDoble" text="Doble" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowVistaSuiteJunior" text="Suite Junior" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleShowVistaSuite" text="Suite" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

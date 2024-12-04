@@ -7,8 +7,27 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 public class RootLayoutController {
-    MainApp hotel = new MainApp();
+
+    MainApp mainApp = new MainApp();
 
     public RootLayoutController() throws ExcepcionHotel {}
+
+    public void handleShowVistaDoble() {
+        mainApp.showVistaDoble();
+    }
+
+    public void handleShowVistaDobleIndividual() {
+        mainApp.showVistaDobleIndividual();
+    }
+
+    public void handleShowVistaSuiteJunior() {
+        mainApp.showVistaSuiteIndividual();
+    }
+
+    public void handleShowVistaSuite() {
+        mainApp.showVistaSuite();
+    }
+
+
 
 }
