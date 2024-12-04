@@ -75,14 +75,14 @@
                                 <AnchorPane prefHeight="298.0" prefWidth="693.0">
                                     <children>
                                         <Label text="Reservas del Cliente" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                        <HBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                                           <children>
-                                               <Button onAction="#handleNewReserva" text="New..." />
-                                               <Button onAction="#handleEditReserva" text="Edit..." />
-                                               <Button onAction="#handleDeleteReserva" text="Delete" />
-                                           </children>
-                                        </HBox>
-                              <ListView fx:id="listaReservas" layoutX="14.0" layoutY="41.0" prefHeight="296.0" prefWidth="657.0" />
+                              <ListView fx:id="listaReservas" layoutX="14.0" layoutY="41.0" prefHeight="274.0" prefWidth="657.0" />
+                              <HBox layoutX="499.0" layoutY="333.0" spacing="10">
+                                 <children>
+                                    <Button onAction="#handleNewReserva" text="New.." />
+                                    <Button onAction="#handleEditReserva" text="Edit.." />
+                                    <Button onAction="#handleDeleteReserva" text="Delete" />
+                                 </children>
+                              </HBox>
                                     </children>
                                 </AnchorPane>
                             </items>

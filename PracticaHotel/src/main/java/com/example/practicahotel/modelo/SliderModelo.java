@@ -13,17 +13,13 @@ public class SliderModelo {
     private final List<Image> suite;
 
     public SliderModelo() {
+
         doble_individual = new ArrayList<>();
-            cargarImagenes();
-
         doble = new ArrayList<>();
-            cargarImagenes();
-
         suite_junior = new ArrayList<>();
-            cargarImagenes();
-
         suite = new ArrayList<>();
-            cargarImagenes();
+
+        cargarImagenes();
         }
 
         private void cargarImagenes() {

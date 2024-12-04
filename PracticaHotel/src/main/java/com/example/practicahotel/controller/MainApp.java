@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -73,7 +74,7 @@ public class MainApp extends Application {
             String rutaFXML = String.format("/com/example/practicahotel/%s.fxml", vistaNombre);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(rutaFXML));
-            AnchorPane vista = loader.load();
+            VBox vista = loader.load();
 
             // Colocar la vista cargada en el centro del rootLayout
             rootLayout.setCenter(vista);

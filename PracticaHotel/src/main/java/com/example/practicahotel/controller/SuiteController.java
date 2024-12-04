@@ -29,17 +29,21 @@ public class SuiteController {
         modelo = new SliderModelo();
 
         // Configurar slider
-        slider.setMax(modelo.getSuite().size() - 1);
-        slider.valueProperty().addListener((obs, oldVal, newVal) -> {
-            int index = newVal.intValue();
-            imageView.setImage(modelo.getSuite().get(index));
-        });
-
-        // Mostrar la primera imagen por defecto
         if (!modelo.getSuite().isEmpty()) {
+            slider.setMax(modelo.getSuite().size() - 1);
+            slider.valueProperty().addListener((obs, oldVal, newVal) -> {
+                int index = newVal.intValue();
+                imageView.setImage(modelo.getSuite().get(index));
+            });
+
+            // Mostrar la primera imagen por defecto
             imageView.setImage(modelo.getSuite().get(0));
+        } else {
+            // Manejar el caso de listas vacías
+            System.out.println("No hay imágenes disponibles para mostrar.");
         }
     }
+
 
     private void actualizarOcupacion() {
         int habitacionesTotales = reservaModelo.getHabitacionesTotales("suite");
