@@ -19,12 +19,17 @@ public class TestRedes {
             //Array de las direcciones IP de google
             System.out.println("\tDIRECCIONES IP PARA: " + direc.getHostName());
             InetAddress[] direcciones = InetAddress.getAllByName(direc.getHostName());
+            for (int i = 0; i < direcciones.length; i++)
+                System.out.println("\t\t"+direcciones[i].toString());
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
 
     }
+
+
+
 
     public static void pruebaMetodos(InetAddress direc){
         System.out.println("\tMétodo getByName(): " + direc);
