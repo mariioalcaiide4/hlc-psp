@@ -1,26 +1,22 @@
 package actividad4_1;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
 import java.io.IOException;
-import java.net.SocketException;
-import java.util.Scanner;
 
-public class ClienteFTP {
-    public static void main (String [] args) throws SocketException, IOException {
+public class ClienteRemotoFTP {
+    public static void main (String[] args){
 
         FTPClient cliente = new FTPClient();
-        String servFTP = "localhost";
-        cliente.connect(servFTP);
-
-        System.out.println("Nos conectamos a: " + servFTP);
-        //Credenciales para acceder al servidor FTP
+        String servidor = "ftp.rediris.es";
+        int puerto = 21;
         String usuario = "anonymous";
         String contraseña = "";
 
         try {
-            cliente.connect(servFTP);
+            cliente.connect(servidor);
             cliente.enterLocalPassiveMode(); //modo pasivo
 
             boolean login = cliente.login(usuario, contraseña);
@@ -31,6 +27,13 @@ public class ClienteFTP {
                 cliente.disconnect();
                 System.exit(1);
             }
+
+            System.out.println("Conectado al servidor FTP.");
+
+            // Cambiar a modo pasivo y binario
+            cliente.enterLocalPassiveMode();
+            cliente.setFileType(FTP.BINARY_FILE_TYPE);
+
             System.out.println("Dirección actual: " + cliente.printWorkingDirectory() );
             FTPFile[] files = cliente.listFiles();
             System.out.println("Ficheros en el directorio actual:" + files.length);
@@ -50,10 +53,6 @@ public class ClienteFTP {
         } catch (IOException ioe){
             ioe.printStackTrace();
         }
+
     }
 }
-
-
-        
-
-
