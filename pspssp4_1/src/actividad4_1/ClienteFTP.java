@@ -16,8 +16,8 @@ public class ClienteFTP {
 
         System.out.println("Nos conectamos a: " + servFTP);
         //Credenciales para acceder al servidor FTP
-        String usuario = "anonymous";
-        String contraseña = "";
+        String usuario = "mario";
+        String contraseña = "mario";
 
         try {
             cliente.connect(servFTP);
