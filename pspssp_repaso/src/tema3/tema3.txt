@@ -1,0 +1,112 @@
+📌 TCP (Transmission Control Protocol)
+
+TCP es un protocolo orientado a conexión, lo que significa que antes de enviar datos, debe establecerse una conexión entre el cliente
+ y el servidor. TCP garantiza que los datos lleguen en orden, sin errores y sin pérdidas.
+
+📌 UDP (User Datagram Protocol)
+
+UDP es un protocolo sin conexión, lo que significa que los datos se envían sin establecer una conexión previa.
+No garantiza que los datos lleguen en orden ni que lleguen correctamente,
+pero es más rápido y eficiente en transmisión de datos en tiempo real.
+
+✅ TCP garantiza la entrega de los datos y es ideal para aplicaciones que necesitan precisión, como un sistema de mensajes o transferencia de archivos.
+🔹 Servidor TCP (escucha conexiones de clientes)
+
+import java.io.*;
+import java.net.*;
+
+public class ServidorTCP {
+    public static void main(String[] args) throws IOException {
+        int puerto = 1234;
+        ServerSocket serverSocket = new ServerSocket(puerto);
+        System.out.println("Servidor TCP escuchando en el puerto " + puerto);
+
+        while (true) {
+            Socket socket = serverSocket.accept();
+            System.out.println("Cliente conectado.");
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+
+            String mensaje = input.readLine();
+            System.out.println("Mensaje recibido: " + mensaje);
+
+            output.println("Mensaje recibido correctamente.");
+
+            socket.close();
+        }
+    }
+}
+
+🔹 Cliente TCP (envía un mensaje al servidor)
+
+import java.io.*;
+import java.net.*;
+
+public class ClienteTCP {
+    public static void main(String[] args) throws IOException {
+        String servidor = "localhost";
+        int puerto = 1234;
+
+        Socket socket = new Socket(servidor, puerto);
+        PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        output.println("Hola, servidor TCP!");
+        System.out.println("Respuesta del servidor: " + input.readLine());
+
+        socket.close();
+    }
+}
+
+🟢 Flujo TCP:
+
+El servidor espera conexiones.
+El cliente se conecta y envía un mensaje.
+El servidor responde y cierra la conexión.
+
+Ejemplo de Servidor y Cliente en UDP
+
+✅ UDP es rápido y se usa cuando no importa si se pierde algún paquete (por ejemplo, en videojuegos en línea).
+🔹 Servidor UDP (recibe mensajes)
+
+import java.net.*;
+
+public class ServidorUDP {
+    public static void main(String[] args) throws Exception {
+        int puerto = 1234;
+        DatagramSocket socket = new DatagramSocket(puerto);
+        System.out.println("Servidor UDP escuchando en el puerto " + puerto);
+
+        byte[] buffer = new byte[1024];
+
+        while (true) {
+            DatagramPacket paquete = new DatagramPacket(buffer, buffer.length);
+            socket.receive(paquete);
+
+            String mensaje = new String(paquete.getData(), 0, paquete.getLength());
+            System.out.println("Mensaje recibido: " + mensaje);
+        }
+    }
+}
+
+🔹 Cliente UDP (envía un mensaje al servidor)
+
+import java.net.*;
+
+public class ClienteUDP {
+    public static void main(String[] args) throws Exception {
+        String servidor = "localhost";
+        int puerto = 1234;
+
+        DatagramSocket socket = new DatagramSocket();
+        byte[] buffer = "Hola, servidor UDP!".getBytes();
+        InetAddress direccion = InetAddress.getByName(servidor);
+
+        DatagramPacket paquete = new DatagramPacket(buffer, buffer.length, direccion, puerto);
+        socket.send(paquete);
+
+        System.out.println("Mensaje enviado al servidor UDP.");
+        socket.close();
+    }
+}
