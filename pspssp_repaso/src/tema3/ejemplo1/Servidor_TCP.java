@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Servidor_TCP {
+
+
     private static List<Alumno> alumnos = new ArrayList<>();
+
+    //Lista de alumnos (en este caso Clase que ya tenemos)
 
     public static void main(String[] args) {
         int puerto = 5555;
