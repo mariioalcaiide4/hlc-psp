@@ -1,0 +1,75 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+# Cargar el dataset
+
+df = pd.read_csv('ocupacion-de-camas-en-hospitales.csv', sep=';')
+df['fecha'] = pd.to_datetime(df['fecha'], dayfirst=True, errors='coerce')
+df = df.dropna(subset=['fecha'])
+
+# Crear variable numérica de fecha (días desde el primer día del dataset)
+
+fecha_inicio = df['fecha'].min()
+df['dias_desde_inicio'] = (df['fecha'] - fecha_inicio).dt.days
+
+Fernando Usero Fuentes
+
+Módulo profesional: Acceso a datos
+
+# Seleccionar solo las columnas necesarias
+
+df = df[['fecha', 'camas_ocupadas_planta', 'camas_habilitadas_planta', 'camas_habilitadas_uci',
+'provincia', 'hospital', 'dias_desde_inicio']]
+
+# Aplicar One Hot Encoding a provincia y hospital
+
+df = pd.get_dummies(df, columns=['provincia', 'hospital'], prefix=['prov', 'hosp'])
+# Agrupar por fecha sumando valores de toda la comunidad
+
+df_daily = df.groupby('fecha').sum().reset_index()
+
+# Dividir en entrenamiento y test (Noviembre 2024 como test)
+
+df_train = df_daily[(df_daily['fecha'] < '2024-11-01') | (df_daily['fecha'] > '2024-11-30')]
+df_test = df_daily[(df_daily['fecha'] >= '2024-11-01') & (df_daily['fecha'] <= '2024-11-30')]
+
+# Seleccionar las columnas predictoras
+
+columnas_predictoras = ['dias_desde_inicio', 'camas_habilitadas_planta', 'camas_habilitadas_uci'] +
+\
+[col for col in df_train.columns if col.startswith('prov_') or col.startswith('hosp_')]
+X_train = df_train[columnas_predictoras]
+y_train = df_train['camas_ocupadas_planta']
+X_test = df_test[columnas_predictoras]
+y_test = df_test['camas_ocupadas_planta']
+
+# Modelo de regresión lineal múltiple
+
+modelo_multiple = LinearRegression()
+modelo_multiple.fit(X_train, y_train)
+
+# Predicción
+
+Fernando Usero Fuentes
+Módulo profesional: Acceso a datos
+y_pred = modelo_multiple.predict(X_test)
+
+# Evaluación del error (sin squared)
+
+mse = mean_squared_error(y_test, y_pred)
+rmse = mse ** 0.5
+print(f'RMSE con Regresión Lineal Múltiple: {rmse:.2f}')
+
+# Gráfica
+
+plt.figure(figsize=(10, 5))
+plt.plot(df_test['fecha'], y_test, marker='o', linestyle='-', label='Datos reales')
+plt.plot(df_test['fecha'], y_pred, marker='x', linestyle='--', label='Predicción')
+plt.title('Regresión Lineal Múltiple - Noviembre 2024')
+plt.xlabel('Fecha')
+plt.ylabel('Camas Ocupadas en Planta')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.legend()
+plt.show()

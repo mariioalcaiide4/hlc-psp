@@ -1,4 +1,4 @@
-package actividad1;
+package tema5.actividad1;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +15,7 @@ public class md5 {
             emd = MessageDigest.getInstance("MD5");
 
             // Texto a procesar
-            String texto = "Esto es un texto plano.";
+            String texto = "Paco Gelte Congana";
 
             // Se convierte el texto en un array de bytes
             byte[] dataBytes = texto.getBytes();

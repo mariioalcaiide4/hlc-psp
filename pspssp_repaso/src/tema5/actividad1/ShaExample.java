@@ -1,4 +1,4 @@
-package actividad1;
+package tema5.actividad1;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
