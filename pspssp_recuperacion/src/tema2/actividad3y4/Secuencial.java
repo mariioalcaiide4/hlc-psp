@@ -1,4 +1,4 @@
-package tema2.actividad3;
+package tema2.actividad3y4;
 
 import java.io.*;
 
@@ -29,6 +29,11 @@ public class Secuencial {
                 System.out.println("Error al leer el archivo: " + archivo);
                 e.printStackTrace();
             }
+
+            long t_fin = System.currentTimeMillis(); // Finalizar medición
+
+            System.out.println("Tiempo total de ejecución: " + (t_fin - t_comienzo) + " ms");
+
         }
 
     /*
